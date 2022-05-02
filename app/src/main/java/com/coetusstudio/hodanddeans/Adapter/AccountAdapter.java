@@ -46,15 +46,19 @@ public class AccountAdapter extends FirebaseRecyclerAdapter<Accountdata,AccountA
         holder.name.setText(Accountdata.getNameAccount());
         holder.email.setText(Accountdata.getEmailAccount());
         holder.id.setText(Accountdata.getIdAccount());
-        holder.subject.setText(Accountdata.getPositionAccount());
-        Glide.with(holder.img.getContext()).load(Accountdata.getImageAccount()).into(holder.img);
+        holder.position.setText(Accountdata.getPositionAccount());
+        Glide.with(holder.img.getContext()).load(Accountdata.getImageAccount())
+            .placeholder(R.drawable.manimg)
+            .circleCrop()
+            .error(R.drawable.manimg)
+            .into(holder.img);
 
         holder.edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final DialogPlus dialogPlus= DialogPlus.newDialog(holder.img.getContext())
                         .setContentHolder(new ViewHolder(R.layout.dialogfaculty))
-                        .setExpanded(true,1100)
+                        .setExpanded(true,1500)
                         .create();
 
                 View myview=dialogPlus.getHolderView();
@@ -84,7 +88,7 @@ public class AccountAdapter extends FirebaseRecyclerAdapter<Accountdata,AccountA
                         map.put("FacultySubject",subject.getText().toString());
                         map.put("FacultySubjectCode",subjectCode.getText().toString());
 
-                        FirebaseDatabase.getInstance().getReference().child("Account Data")
+                        FirebaseDatabase.getInstance().getReference().child("IIMTU").child("Account Data")
                                 .updateChildren(map)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
@@ -110,13 +114,13 @@ public class AccountAdapter extends FirebaseRecyclerAdapter<Accountdata,AccountA
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder=new AlertDialog.Builder(holder.img.getContext());
-                builder.setTitle("Delete Panel");
-                builder.setMessage("Delete...?");
+                builder.setTitle("Warning");
+                builder.setMessage("Are you sure want to delete Account Faculty...?");
 
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        FirebaseDatabase.getInstance().getReference().child("Account Data")
+                        FirebaseDatabase.getInstance().getReference().child("IIMTU").child("Account Data")
                                 .removeValue();
                     }
                 });
@@ -131,6 +135,8 @@ public class AccountAdapter extends FirebaseRecyclerAdapter<Accountdata,AccountA
                 builder.show();
             }
         });
+
+
 
     } // End of OnBindViewMethod
 
@@ -147,18 +153,18 @@ public class AccountAdapter extends FirebaseRecyclerAdapter<Accountdata,AccountA
     {
         CircleImageView img;
         ImageView edit,delete;
-        TextView name,course,email,id,subject,subjectCode;
+        TextView name,course,email,id,position;
         public myviewholder(@NonNull View itemView)
         {
             super(itemView);
-            img=itemView.findViewById(R.id.imageAccount);
-            name=itemView.findViewById(R.id.nameAccount);
-            email=itemView.findViewById(R.id.emailAccount);
-            id=itemView.findViewById(R.id.idAccount);
-            subject=itemView.findViewById(R.id.positionAccount);
+            img=itemView.findViewById(R.id.imgRcAccount);
+            name=itemView.findViewById(R.id.nameRcAccount);
+            email=itemView.findViewById(R.id.emailRcAccount);
+            id=itemView.findViewById(R.id.idRcAccount);
+            position=itemView.findViewById(R.id.positionRcAccount);
 
-            edit=(ImageView)itemView.findViewById(R.id.editicon);
-            delete=(ImageView)itemView.findViewById(R.id.deleteicon);
+            edit=(ImageView)itemView.findViewById(R.id.editRcAccount);
+            delete=(ImageView)itemView.findViewById(R.id.deleteRcAccount);
         }
     }
 }

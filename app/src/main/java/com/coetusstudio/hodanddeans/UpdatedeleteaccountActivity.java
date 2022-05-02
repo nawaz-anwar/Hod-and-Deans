@@ -34,7 +34,7 @@ public class UpdatedeleteaccountActivity extends AppCompatActivity {
 
         FirebaseRecyclerOptions<Accountdata> options =
                 new FirebaseRecyclerOptions.Builder<Accountdata>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Account Data"), Accountdata.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("IIMTU").child("Account Data"), Accountdata.class)
                         .build();
 
         adapterAccount=new AccountAdapter(options);

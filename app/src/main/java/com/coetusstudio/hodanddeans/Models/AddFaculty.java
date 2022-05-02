@@ -1,7 +1,8 @@
 package com.coetusstudio.hodanddeans.Models;
 
 public class AddFaculty {
-    String facultyImage, facultyName, facultyEmail, facultyId, facultySubject, facultySubjectCode, facultyPassword, facultyMessage;
+    private static String facultyImage;
+    String facultyName, facultyEmail, facultyId, facultySubject, facultySubjectCode, facultyPassword, facultyMessage;
 
 
     public AddFaculty(String facultyImage, String facultyName, String facultyEmail, String facultyId, String facultySubject, String facultySubjectCode, String facultyPassword, String facultyMessage) {
@@ -25,7 +26,7 @@ public class AddFaculty {
         this.facultyPassword = facultyPassword;
     }
 
-    public String getFacultyImage() {
+    public static String getFacultyImage() {
         return facultyImage;
     }
 

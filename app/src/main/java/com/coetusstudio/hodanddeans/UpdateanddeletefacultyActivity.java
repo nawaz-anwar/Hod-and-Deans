@@ -6,17 +6,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.SearchView;
+import android.util.Log;
 
 import com.coetusstudio.hodanddeans.Adapter.FacultyAdapter;
 import com.coetusstudio.hodanddeans.Models.AddFaculty;
 import com.coetusstudio.hodanddeans.databinding.ActivityUpdateanddeletefacultyBinding;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -27,8 +25,7 @@ public class UpdateanddeletefacultyActivity extends AppCompatActivity {
 
     ActivityUpdateanddeletefacultyBinding binding;
     FirebaseAuth auth;
-    FirebaseDatabase database;
-    RecyclerView recview;
+    DatabaseReference database;
     ArrayList<AddFaculty> addFaculties;
     FacultyAdapter adapter;
 
@@ -41,30 +38,42 @@ public class UpdateanddeletefacultyActivity extends AppCompatActivity {
         setTitle("Search here..");
 
         auth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance();
+        database = FirebaseDatabase.getInstance().getReference().child("IIMTU").child("Faculty");
 
         addFaculties = new ArrayList<>();
 
         adapter = new FacultyAdapter(this, addFaculties);
-        binding.recview.setAdapter(adapter);
+        binding.rcFactulty.setAdapter(adapter);
 
-        database.getReference().child("Faculty").addValueEventListener(new ValueEventListener() {
+        database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                addFaculties.clear();
-                for (DataSnapshot snapshot1 : snapshot.getChildren()){
-                    AddFaculty addFaculty = snapshot.getValue(AddFaculty.class);
-                    addFaculties.add(addFaculty);
+                if(snapshot.exists()){
+                    for(DataSnapshot snapshot1 : snapshot.getChildren()){
+                        AddFaculty data = snapshot1.getValue(AddFaculty.class);
+                        addFaculties.add(data);
+                    }
+                    adapter.notifyDataSetChanged();
                 }
-                adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Log.e("UpdateActivity", error.toString());
             }
         });
 
     }
 
+//    private void adapterSetup(ArrayList<AddFaculty> addFaculties){
+//
+//        Log.d("list", String.valueOf(addFaculties.size()));
+//
+//        rcView = binding.rcFactulty;
+//        rcView.setLayoutManager(new LinearLayoutManager(this));
+//        adapter = new FacultyAdapter(this, addFaculties);
+//        rcView.setAdapter(adapter);
+//    }
+
+    
 }
