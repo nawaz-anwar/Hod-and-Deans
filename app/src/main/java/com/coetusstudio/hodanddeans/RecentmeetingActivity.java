@@ -9,51 +9,47 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SearchView;
 
-import com.coetusstudio.hodanddeans.Adapter.AccountAdapter;
-import com.coetusstudio.hodanddeans.Adapter.FacultyAdapter;
-import com.coetusstudio.hodanddeans.Models.Accountdata;
-import com.coetusstudio.hodanddeans.Models.AddFaculty;
+import com.coetusstudio.hodanddeans.Adapter.MeetingAdapter;
+import com.coetusstudio.hodanddeans.Models.Lecture;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class UpdatedeleteaccountActivity extends AppCompatActivity {
+public class RecentmeetingActivity extends AppCompatActivity {
 
-
-    RecyclerView recviewAccount;
-    AccountAdapter adapterAccount;
+    RecyclerView recviewLecture;
+    MeetingAdapter lectureAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_updatedeleteaccount);
+        setContentView(R.layout.activity_recentmeeting);
 
-        setTitle("Search here..");
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(RecentmeetingActivity.this);
+        recviewLecture=(RecyclerView)findViewById(R.id.rcLecture);
+        recviewLecture.setLayoutManager(linearLayoutManager);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
 
-        recviewAccount=(RecyclerView)findViewById(R.id.recviewAccount);
-        recviewAccount.setLayoutManager(new LinearLayoutManager(this));
-
-        FirebaseRecyclerOptions<Accountdata> options =
-                new FirebaseRecyclerOptions.Builder<Accountdata>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("IIMTU").child("Account Data"), Accountdata.class)
+        FirebaseRecyclerOptions<Lecture> options =
+                new FirebaseRecyclerOptions.Builder<Lecture>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Lecture"), Lecture.class)
                         .build();
 
-        adapterAccount=new AccountAdapter(options);
-        recviewAccount.setAdapter(adapterAccount);
+        lectureAdapter=new MeetingAdapter(options);
+        recviewLecture.setAdapter(lectureAdapter);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        adapterAccount.startListening();
+        lectureAdapter.startListening();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        adapterAccount.stopListening();
+        lectureAdapter.stopListening();
     }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -84,14 +80,14 @@ public class UpdatedeleteaccountActivity extends AppCompatActivity {
 
     private void processsearch(String s)
     {
-        FirebaseRecyclerOptions<Accountdata> options =
-                new FirebaseRecyclerOptions.Builder<Accountdata>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("IIMTU").orderByChild("Account Data").startAt(s).endAt(s+"\uf8ff"), Accountdata.class)
+        FirebaseRecyclerOptions<Lecture> options =
+                new FirebaseRecyclerOptions.Builder<Lecture>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Lecture").orderByChild("lectureName").startAt(s).endAt(s+"\uf8ff"), Lecture.class)
                         .build();
 
-        adapterAccount=new AccountAdapter(options);
-        adapterAccount.startListening();
-        recviewAccount.setAdapter(adapterAccount);
+        lectureAdapter=new MeetingAdapter(options);
+        lectureAdapter.startListening();
+        recviewLecture.setAdapter(lectureAdapter);
 
     }
 }

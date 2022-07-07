@@ -4,11 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UpdatedeleteaccountActivity">
-
+    tools:context=".RecentmeetingActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recviewAccount"
+        android:id="@+id/rcLecture"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"

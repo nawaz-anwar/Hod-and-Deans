@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,6 +33,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.ViewHolder;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -41,48 +43,38 @@ import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class FacultyAdapter extends RecyclerView.Adapter<FacultyAdapter.FacultyViewHoilder>{
+public class FacultyAdapter extends FirebaseRecyclerAdapter<AddFaculty,FacultyAdapter.myviewholder>{
 
-    FirebaseAuth auth;
-    Context context;
-    ArrayList<AddFaculty> facultyLists;
-
-    public FacultyAdapter(Context context, ArrayList<AddFaculty> addFaculty){
-        this.context = context;
-        this.facultyLists = addFaculty;
-    }
-
-    @NonNull
-    @Override
-    public FacultyViewHoilder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.singlerowfaculty,parent,false);
-        return new FacultyViewHoilder(view);
+    public FacultyAdapter(@NonNull FirebaseRecyclerOptions<AddFaculty> options)
+    {
+        super(options);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FacultyViewHoilder holder, int position) {
-        AddFaculty addFaculty = facultyLists.get(position);
-        auth = FirebaseAuth.getInstance();
+    protected void onBindViewHolder(@NonNull final FacultyAdapter.myviewholder holder, @SuppressLint("RecyclerView") final int position, @NonNull final AddFaculty AddFaculty)
+    {
 
-        holder.binding.nameText.setText(addFaculty.getFacultyName());
-        holder.binding.emailText.setText(addFaculty.getFacultyEmail());
-        holder.binding.idText.setText(addFaculty.getFacultyId());
-        holder.binding.subjectText.setText(addFaculty.getFacultySubject());
-        holder.binding.subjectCodeText.setText(addFaculty.getFacultySubjectCode());
-        Glide.with(holder.binding.imgText.getContext()).load(AddFaculty.getFacultyImage())
+
+        holder.name.setText(AddFaculty.getFacultyName());
+        holder.email.setText(AddFaculty.getFacultyEmail());
+        holder.id.setText(AddFaculty.getFacultyId());
+        holder.subject.setText(AddFaculty.getFacultySubject());
+        holder.subjectCode.setText(AddFaculty.getFacultySubjectCode());
+        Glide.with(holder.img.getContext()).load(AddFaculty.getFacultyImage())
                 .placeholder(R.drawable.manimg)
                 .circleCrop()
                 .error(R.drawable.manimg)
-                .into(holder.binding.imgText);
+                .into(holder.img);
 
-
-        holder.binding.editicon.setOnClickListener(new View.OnClickListener() {
+        /*
+        holder.edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final DialogPlus dialogPlus= DialogPlus.newDialog(holder.binding.editicon.getContext())
+                final DialogPlus dialogPlus= DialogPlus.newDialog(holder.img.getContext())
                         .setContentHolder(new ViewHolder(R.layout.dialogfaculty))
-                        .setExpanded(true,1400)
+                        .setExpanded(true,1500)
                         .create();
+
 
                 View myview=dialogPlus.getHolderView();
                 final EditText imageUrl=myview.findViewById(R.id.updImageFaculty);
@@ -93,32 +85,39 @@ public class FacultyAdapter extends RecyclerView.Adapter<FacultyAdapter.FacultyV
                 final EditText subjectCode=myview.findViewById(R.id.updSubjectCodeFaculty);
                 Button submit=myview.findViewById(R.id.updBtnFaculty);
 
-                imageUrl.setText(AddFaculty.getFacultyImage());
 
+                imageUrl.setText(AddFaculty.getFacultyImage());
+                name.setText(AddFaculty.getFacultyName());
+                email.setText(AddFaculty.getFacultyEmail());
+                id.setText(AddFaculty.getFacultyId());
+                subject.setText(AddFaculty.getFacultySubject());
+                subject.setText(AddFaculty.getFacultySubjectCode());
                 dialogPlus.show();
 
                 submit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Map<String,Object> map=new HashMap<>();
-                        map.put("FacultyImage",imageUrl.getText().toString());
-                        map.put("FacultyName",name.getText().toString());
-                        map.put("FacultyEmail",email.getText().toString());
-                        map.put("FacultyId",id.getText().toString());
-                        map.put("FacultySubject",subject.getText().toString());
-                        map.put("FacultySubjectCode",subjectCode.getText().toString());
+                        map.put("facultyImage",imageUrl.getText().toString());
+                        map.put("facultyName",name.getText().toString());
+                        map.put("facultyEmail",email.getText().toString());
+                        map.put("facultyId",id.getText().toString());
+                        map.put("facultySubject",subject.getText().toString());
+                        map.put("facultySubjectCode",subjectCode.getText().toString());
 
-                        FirebaseDatabase.getInstance().getReference().child("IIMTU").child("Faculty").child(auth.getUid())
+                        FirebaseDatabase.getInstance().getReference().child("IIMTU").child("Faculty").child(getRef(position).getKey())
                                 .updateChildren(map)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
+                                        Toast.makeText(holder.img.getContext(), "Success", Toast.LENGTH_SHORT).show();
                                         dialogPlus.dismiss();
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(holder.img.getContext(), "Error", Toast.LENGTH_SHORT).show();
                                         dialogPlus.dismiss();
                                     }
                                 });
@@ -129,17 +128,17 @@ public class FacultyAdapter extends RecyclerView.Adapter<FacultyAdapter.FacultyV
             }
         });
 
-        holder.binding.deleteicon.setOnClickListener(new View.OnClickListener() {
+        holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder=new AlertDialog.Builder(holder.binding.imgText.getContext());
+                AlertDialog.Builder builder=new AlertDialog.Builder(holder.img.getContext());
                 builder.setTitle("Warning");
-                builder.setMessage("Are you sure want to delete Faculty...?");
+                builder.setMessage("Are you sure want to delete Student Data...?");
 
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        FirebaseDatabase.getInstance().getReference().child("IIMTU").child("Faculty").child(auth.getUid())
+                        FirebaseDatabase.getInstance().getReference().child("IIMTU").child("Faculty").child(getRef(position).getKey())
                                 .removeValue();
                     }
                 });
@@ -154,20 +153,38 @@ public class FacultyAdapter extends RecyclerView.Adapter<FacultyAdapter.FacultyV
                 builder.show();
             }
         });
-    }
 
+         */
+    } // End of OnBindViewMethod
+
+    @NonNull
     @Override
-    public int getItemCount() {
-        return facultyLists.size();
+    public FacultyAdapter.myviewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+    {
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.singlerowfaculty,parent,false);
+        return new FacultyAdapter.myviewholder(view);
     }
 
-    public class FacultyViewHoilder extends RecyclerView.ViewHolder{
 
-        SinglerowfacultyBinding binding;
-
-        public FacultyViewHoilder(@NonNull View itemView) {
+    class myviewholder extends RecyclerView.ViewHolder
+    {
+        CircleImageView img;
+        ImageView edit,delete;
+        TextView name,email,id,subject,subjectCode,admission,enrollment,roll,fees,semester,grade,attendance;
+        public myviewholder(@NonNull View itemView)
+        {
             super(itemView);
-            binding = SinglerowfacultyBinding.bind(itemView);
+            img=itemView.findViewById(R.id.facultyRcImage);
+            name=itemView.findViewById(R.id.facultyRcName);
+            email=itemView.findViewById(R.id.facultyRcEmail);
+            id=itemView.findViewById(R.id.facultyRcId);
+            subject=itemView.findViewById(R.id.facultyRcSubjectName);
+            subjectCode=itemView.findViewById(R.id.facultyRcSubjectCode);
+
+            edit=(ImageView)itemView.findViewById(R.id.editRcAccount);
+            delete=(ImageView)itemView.findViewById(R.id.deleteRcAccount);
+
         }
     }
+
 }

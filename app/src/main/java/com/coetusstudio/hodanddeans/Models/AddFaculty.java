@@ -1,32 +1,42 @@
 package com.coetusstudio.hodanddeans.Models;
 
+import android.net.Uri;
+
 public class AddFaculty {
-    private static String facultyImage;
-    String facultyName, facultyEmail, facultyId, facultySubject, facultySubjectCode, facultyPassword, facultyMessage;
 
+    String facultyImage, facultyName, facultyEmail, facultyId, facultySubject, facultySubjectCode, facultyBranch, facultySemester, facultySection,facultyPassword, facultyMessage;
 
-    public AddFaculty(String facultyImage, String facultyName, String facultyEmail, String facultyId, String facultySubject, String facultySubjectCode, String facultyPassword, String facultyMessage) {
+    public AddFaculty(String facultyImage, String facultyName, String facultyEmail, String facultyId, String facultySubject, String facultySubjectCode, String facultyBranch, String facultySemester, String facultySection, String facultyPassword, String facultyMessage) {
         this.facultyImage = facultyImage;
         this.facultyName = facultyName;
         this.facultyEmail = facultyEmail;
         this.facultyId = facultyId;
         this.facultySubject = facultySubject;
         this.facultySubjectCode = facultySubjectCode;
+        this.facultyBranch = facultyBranch;
+        this.facultySemester = facultySemester;
+        this.facultySection = facultySection;
         this.facultyPassword = facultyPassword;
         this.facultyMessage = facultyMessage;
     }
-    public AddFaculty(){}
-    public AddFaculty(String facultyImage, String facultyName, String facultyEmail, String facultyId, String facultySubject, String facultySubjectCode, String facultyPassword) {
+
+    public AddFaculty() {
+    }
+
+    public AddFaculty(String facultyImage, String facultyName, String facultyEmail, String facultyId, String facultySubject, String facultySubjectCode, String facultyBranch, String facultySemester, String facultySection, String facultyPassword) {
         this.facultyImage = facultyImage;
         this.facultyName = facultyName;
         this.facultyEmail = facultyEmail;
         this.facultyId = facultyId;
         this.facultySubject = facultySubject;
         this.facultySubjectCode = facultySubjectCode;
+        this.facultyBranch = facultyBranch;
+        this.facultySemester = facultySemester;
+        this.facultySection = facultySection;
         this.facultyPassword = facultyPassword;
     }
 
-    public static String getFacultyImage() {
+    public String getFacultyImage() {
         return facultyImage;
     }
 
@@ -88,5 +98,29 @@ public class AddFaculty {
 
     public void setFacultyMessage(String facultyMessage) {
         this.facultyMessage = facultyMessage;
+    }
+
+    public String getFacultyBranch() {
+        return facultyBranch;
+    }
+
+    public void setFacultyBranch(String facultyBranch) {
+        this.facultyBranch = facultyBranch;
+    }
+
+    public String getFacultySemester() {
+        return facultySemester;
+    }
+
+    public void setFacultySemester(String facultySemester) {
+        this.facultySemester = facultySemester;
+    }
+
+    public String getFacultySection() {
+        return facultySection;
+    }
+
+    public void setFacultySection(String facultySection) {
+        this.facultySection = facultySection;
     }
 }

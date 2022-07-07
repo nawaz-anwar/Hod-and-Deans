@@ -60,14 +60,26 @@
                 android:id="@+id/noticeTitle"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Send Notice"
-            android:layout_marginTop="16dp"
-            android:textAllCaps="false"
-            android:id="@+id/btnSendNotification"/>
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSendNotification"
+            android:layout_width="213dp"
+            android:layout_height="51dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/round_button"
+            android:layout_marginLeft="95dp"
+            android:text="Send Notice"
+            android:textAllCaps="false" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRecentNotification"
+            android:layout_width="213dp"
+            android:layout_height="51dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/round_button"
+            android:layout_marginLeft="95dp"
+            android:text="Recent Notice"
+            android:textAllCaps="false" />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"

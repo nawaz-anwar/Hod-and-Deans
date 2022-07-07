@@ -1,9 +1,11 @@
 package com.coetusstudio.hodanddeans;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -24,8 +26,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -34,17 +43,14 @@ import java.util.Calendar;
 
 public class SentnotificationActivity extends AppCompatActivity {
 
-    private static final int PICK_IMAGE_REQUEST = 5;
     private CardView sendNotification;
-    private final int REQ = 1;
     private Bitmap bitmap;
     private ImageView addImg, noticeImageView;
     Uri filepath;
     private EditText noticeTitle;
-    private Button btnSendNotification;
-    private DatabaseReference reference;
-    private StorageReference storageReference;
-    String downloadUrl = "";
+    private Button btnSendNotification, btnRecentNotification;
+    StorageReference storageReference;
+    DatabaseReference databaseReference;
     private ProgressDialog pd;
 
 
@@ -56,160 +62,107 @@ public class SentnotificationActivity extends AppCompatActivity {
 
         pd = new ProgressDialog(this);
 
-        reference = FirebaseDatabase.getInstance().getReference();
-        storageReference = FirebaseStorage.getInstance().getReference();
+        storageReference= FirebaseStorage.getInstance().getReference();
+        databaseReference= FirebaseDatabase.getInstance().getReference();
 
         sendNotification = findViewById(R.id.sendNotification);
         noticeImageView = findViewById(R.id.noticeImageView);
         addImg = findViewById(R.id.addImg);
         noticeTitle = findViewById(R.id.noticeTitle);
         btnSendNotification = findViewById(R.id.btnSendNotification);
+        btnRecentNotification = findViewById(R.id.btnRecentNotification);
 
-
+        btnRecentNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SentnotificationActivity.this, RecentnoticeActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         addImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                selectImage();
+                Dexter.withContext(getApplicationContext())
+                        .withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                        .withListener(new PermissionListener() {
+                            @Override
+                            public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+                                Intent intent=new Intent();
+                                intent.setType("image/*");
+                                intent.setAction(Intent.ACTION_GET_CONTENT);
+                                startActivityForResult(Intent.createChooser(intent,"Select Image Files"),101);
+                            }
+
+                            @Override
+                            public void onPermissionDenied(PermissionDeniedResponse permissionDeniedResponse) {
+
+                            }
+
+                            @Override
+                            public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+                                permissionToken.continuePermissionRequest();
+                            }
+                        }).check();
             }
         });
 
         btnSendNotification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (noticeTitle.getText().toString().isEmpty()){
-                    noticeTitle.setError("Empty");
-                    noticeTitle.requestFocus();
-                }else if (bitmap==null){
-                    uploadData();
-                }else {
-                    uploadImage();
-                }
+                processupload(filepath);
             }
         });
 
-    }
-
-    private <storageReference> void uploadImage() {
-        pd.setMessage("Uploading...");
-        pd.show();
-        ByteArrayOutputStream boas = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 50,boas);
-        byte[] finalImg = boas.toByteArray();
-        final StorageReference filepath;
-        filepath = storageReference.child("Notice").child(finalImg+"jpg");
-        final UploadTask uploadTask =filepath.putBytes(finalImg);
-        uploadTask.addOnCompleteListener(SentnotificationActivity.this, new OnCompleteListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                if (task.isSuccessful()){
-                    uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            filepath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    downloadUrl= String.valueOf(uri);
-                                    uploadData();
-
-                                }
-                            });
-
-                        }
-                    });
-                }else{
-                    pd.dismiss();
-                    Toast.makeText(SentnotificationActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-
-    }
-
-    private void uploadData() {
-        reference = reference.child("Notice");
-        final String uniqueKey = reference.push().getKey();
-
-        String title = noticeTitle.getText().toString();
-
-        Calendar calForDate = Calendar.getInstance();
-        SimpleDateFormat currentDate = new SimpleDateFormat("dd-MM-yy");
-        String date = currentDate.format(calForDate.getTime());
-
-        Calendar CalFortime = Calendar.getInstance();
-        SimpleDateFormat currentTime = new SimpleDateFormat("hh:mm a");
-        String time = currentTime.format(CalFortime.getTime());
-
-        NoticeData noticeData = new NoticeData(title,downloadUrl,date,time,uniqueKey);
-
-        reference.child(uniqueKey).setValue(noticeData).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                pd.dismiss();
-                Toast.makeText(SentnotificationActivity.this, "Notice Uploaded", Toast.LENGTH_SHORT).show();
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                pd.dismiss();
-                Toast.makeText(SentnotificationActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-    }
-
-
-    private void selectImage() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(
-                Intent.createChooser(
-                        intent,
-                        "Select Image from here..."),
-                PICK_IMAGE_REQUEST);
     }
     @Override
-    protected void onActivityResult(int requestCode,
-                                    int resultCode,
-                                    Intent data)
-    {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-        super.onActivityResult(requestCode,
-                resultCode,
-                data);
-
-        // checking request code and result code
-        // if request code is PICK_IMAGE_REQUEST and
-        // resultCode is RESULT_OK
-        // then set image in the image view
-        if (requestCode == PICK_IMAGE_REQUEST
-                && resultCode == RESULT_OK
-                && data != null
-                && data.getData() != null) {
-
-            // Get the Uri of data
-            filepath = data.getData();
-            try {
-
-                // Setting image on image view using Bitmap
-                Bitmap bitmap = MediaStore
-                        .Images
-                        .Media
-                        .getBitmap(
-                                getContentResolver(),
-                                filepath);
-                noticeImageView.setImageBitmap(bitmap);
-            }
-
-            catch (IOException e) {
-                // Log the exception
-                e.printStackTrace();
-            }
+        if(requestCode==101 && resultCode==RESULT_OK)
+        {
+            filepath=data.getData();
+            noticeImageView.setImageURI(data.getData());
         }
+    }
+    public void processupload(Uri filepath)
+    {
+        final ProgressDialog pd=new ProgressDialog(this);
+        pd.setTitle("Notice Uploading....!!!");
+        pd.show();
+
+        final StorageReference reference=storageReference.child("Notice Data/"+System.currentTimeMillis()+".pdf");
+        reference.putFile(filepath)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                        reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+
+                                NoticeData noticeData=new NoticeData(noticeTitle.getText().toString(),uri.toString());
+                                databaseReference.child("Notice").child(databaseReference.push().getKey()).setValue(noticeData);
+
+                                pd.dismiss();
+                                Toast.makeText(getApplicationContext(),"Notice Uploaded",Toast.LENGTH_LONG).show();
+
+
+                                noticeTitle.setText("");
+                                noticeImageView.setVisibility(View.INVISIBLE);
+                            }
+                        });
+
+                    }
+                })
+                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                        float percent=(100*taskSnapshot.getBytesTransferred())/taskSnapshot.getTotalByteCount();
+                        pd.setMessage("Uploaded :"+(int)percent+"%");
+                    }
+                });
+
     }
 }

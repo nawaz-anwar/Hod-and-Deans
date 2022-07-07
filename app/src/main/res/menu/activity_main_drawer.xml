@@ -18,7 +18,7 @@
             android:title="Privacy Policy" />
         <item
             android:id="@+id/aboutUs"
-            android:icon="@drawable/ic_baseline_privacy_tip_24"
+            android:icon="@drawable/aboutus"
             android:title="About us" />
         <item
             android:id="@+id/logout"

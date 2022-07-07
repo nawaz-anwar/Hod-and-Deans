@@ -1,79 +1,100 @@
 package com.coetusstudio.hodanddeans;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.SearchView;
 
 import com.coetusstudio.hodanddeans.Adapter.FacultyAdapter;
 import com.coetusstudio.hodanddeans.Models.AddFaculty;
-import com.coetusstudio.hodanddeans.databinding.ActivityUpdateanddeletefacultyBinding;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
 
 public class UpdateanddeletefacultyActivity extends AppCompatActivity {
 
 
-    ActivityUpdateanddeletefacultyBinding binding;
-    FirebaseAuth auth;
-    DatabaseReference database;
-    ArrayList<AddFaculty> addFaculties;
-    FacultyAdapter adapter;
+
+    RecyclerView recviewFaculty;
+    FacultyAdapter facultyAdapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityUpdateanddeletefacultyBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        setTitle("Search here..");
+        setContentView(R.layout.activity_updateanddeletefaculty);
+        setTitle("Enter ID");
 
-        auth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance().getReference().child("IIMTU").child("Faculty");
 
-        addFaculties = new ArrayList<>();
 
-        adapter = new FacultyAdapter(this, addFaculties);
-        binding.rcFactulty.setAdapter(adapter);
+        recviewFaculty=(RecyclerView)findViewById(R.id.rcFactulty);
+        recviewFaculty.setLayoutManager(new LinearLayoutManager(this));
 
-        database.addValueEventListener(new ValueEventListener() {
+        FirebaseRecyclerOptions<AddFaculty> options =
+                new FirebaseRecyclerOptions.Builder<AddFaculty>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("IIMTU").child("Faculty"), AddFaculty.class)
+                        .build();
+
+        facultyAdapter=new FacultyAdapter(options);
+        recviewFaculty.setAdapter(facultyAdapter);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        facultyAdapter.startListening();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        facultyAdapter.stopListening();
+
+     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.searchmenu,menu);
+
+        MenuItem item=menu.findItem(R.id.search);
+
+        SearchView searchView=(SearchView)item.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
+        {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    for(DataSnapshot snapshot1 : snapshot.getChildren()){
-                        AddFaculty data = snapshot1.getValue(AddFaculty.class);
-                        addFaculties.add(data);
-                    }
-                    adapter.notifyDataSetChanged();
-                }
+            public boolean onQueryTextSubmit(String s) {
+
+                processsearch(s);
+                return false;
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("UpdateActivity", error.toString());
+            public boolean onQueryTextChange(String s) {
+                processsearch(s);
+                return false;
             }
         });
 
+        return super.onCreateOptionsMenu(menu);
     }
 
-//    private void adapterSetup(ArrayList<AddFaculty> addFaculties){
-//
-//        Log.d("list", String.valueOf(addFaculties.size()));
-//
-//        rcView = binding.rcFactulty;
-//        rcView.setLayoutManager(new LinearLayoutManager(this));
-//        adapter = new FacultyAdapter(this, addFaculties);
-//        rcView.setAdapter(adapter);
-//    }
+    private void processsearch(String s)
+    {
+        FirebaseRecyclerOptions<AddFaculty> options =
+                new FirebaseRecyclerOptions.Builder<AddFaculty>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("IIMTU").child("Faculty").orderByChild("facultyId").startAt(s).endAt(s+"\uf8ff"), AddFaculty.class)
+                        .build();
+
+        facultyAdapter=new FacultyAdapter(options);
+        facultyAdapter.startListening();
+        recviewFaculty.setAdapter(facultyAdapter);
+
+    }
+
 
     
 }

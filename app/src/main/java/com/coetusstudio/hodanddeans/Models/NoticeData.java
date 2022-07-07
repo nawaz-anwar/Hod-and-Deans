@@ -3,9 +3,6 @@ package com.coetusstudio.hodanddeans.Models;
 public class NoticeData {
     String title, image, date, time, key;
 
-    public NoticeData() {
-    }
-
     public NoticeData(String title, String image, String date, String time, String key) {
         this.title = title;
         this.image = image;
@@ -13,6 +10,15 @@ public class NoticeData {
         this.time = time;
         this.key = key;
     }
+
+    public NoticeData() {
+    }
+
+    public NoticeData(String s, String toString) {
+        this.title = title;
+        this.image = image;
+    }
+
 
     public String getTitle() {
         return title;

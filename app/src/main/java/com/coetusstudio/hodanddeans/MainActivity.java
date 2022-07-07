@@ -1,17 +1,20 @@
 package com.coetusstudio.hodanddeans;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.coetusstudio.hodanddeans.Models.AddFaculty;
+import com.coetusstudio.hodanddeans.Models.StudentDetails;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
@@ -43,9 +46,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Toolbar toolbar;
     ActivityMainBinding binding;
     FirebaseAuth auth;
+    FirebaseUser currentUser ;
     DatabaseReference database;
-    FirebaseStorage storage;
-    FirebaseUser currentUser;
     String facultyImage, facultyName, facultyEmail, facultyId;
     CircleImageView headerImage;
     TextView headerName, headerEmail, headerID;
@@ -58,6 +60,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         setTitle("HOD and DEANS");
+
+        auth = FirebaseAuth.getInstance();
+        currentUser = auth.getCurrentUser();
 
         sendNotification = findViewById(R.id.sendNotification);
         addNewFaculty = findViewById(R.id.addNewFaculty);
@@ -77,10 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         createForm.setOnClickListener(this);
         addAccountFaculty.setOnClickListener(this);
 
-        headerImage = findViewById(R.id.headerImage);
-        headerName = findViewById(R.id.headerName);
-        headerEmail = findViewById(R.id.headerEmail);
-        headerID = findViewById(R.id.headerID);
+
 
 
 
@@ -90,7 +92,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         auth = FirebaseAuth.getInstance();
         currentUser = auth.getCurrentUser();
-        database = FirebaseDatabase.getInstance().getReference().child("Faculty");
 
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.OpenDrawer, R.string.CloseDrawer);
@@ -98,6 +99,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         toggle.syncState();
+
+        updateNavHeader();
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -109,14 +112,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(MainActivity.this, "Profile", Toast.LENGTH_SHORT).show();
 
                 } else if (id == R.id.profileSendNotification) {
-                    Toast.makeText(MainActivity.this, "Send Notification", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, SentnotificationActivity.class);
+                    startActivity(intent);
 
                 } else if (id == R.id.privacyPolicy) {
-
+                    Uri webpage = Uri.parse("https://www.iimtu.com/privacy-policy");
+                    Intent webMeet = new Intent(Intent.ACTION_VIEW, webpage);
+                    startActivity(webMeet);
                 } else if (id == R.id.aboutUs) {
-
+                    Uri webpage = Uri.parse("https://www.iimtu.com/about-iimt/our-founder");
+                    Intent webMeet = new Intent(Intent.ACTION_VIEW, webpage);
+                    startActivity(webMeet);
                 } else if (id == R.id.logout) {
-
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
                 } else {
 
                 }
@@ -126,6 +136,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return true;
             }
         });
+
+
     }
     @Override
     public void onClick(View view) {
@@ -150,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent4);
                 break;
             case R.id.updateDeleteAccount:
-                Intent intent5 = new Intent(MainActivity.this, UpdatedeleteaccountActivity.class);
+                Intent intent5 = new Intent(MainActivity.this, CraeteBranchSectionActivity.class);
                 startActivity(intent5);
                 break;
             case R.id.createForm:
@@ -163,37 +175,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+    public void updateNavHeader() {
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (currentUser==null){
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-        }
-        else {
-            database.child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()){
-                        facultyImage = snapshot.child("facultyImage").getValue().toString();
-                        facultyName  = snapshot.child("facultyName").getValue().toString();
-                        facultyEmail = snapshot.child("facultyEmail").getValue().toString();
-                        facultyId = snapshot.child("facultyId").getValue().toString();
-                        Picasso.get().load(facultyImage).into(headerImage);
-                        headerName.setText(facultyName);
-                        headerEmail.setText(facultyEmail);
-                        headerID.setText(facultyId);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        TextView navUsername = headerView.findViewById(R.id.headerName);
+        TextView navUserMail = headerView.findViewById(R.id.headerEmail);
+        ImageView navUserPhot = headerView.findViewById(R.id.headerImage);
 
-                    }
+        // now we will use Glide to load user image
+        // first we need to import the library
+
+        FirebaseDatabase.getInstance().getReference().child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+
+                    //StudentDetails studentDetails = snapshot.getValue(StudentDetails.class);
+                    //acultyImage = snapshot.child("imageAccount").getValue().toString();
+                    //facultyName  = snapshot.child("studentName").getValue().toString();
+                    //facultyEmail = snapshot.child("emailAccount").getValue().toString();
+                    //facultyId = snapshot.child("facultyId").getValue().toString();
+                    navUsername.setText(snapshot.child("userName").getValue().toString());
+                    navUserMail.setText(snapshot.child("userEmail").getValue().toString());
+                    Glide.with(MainActivity.this).load("https://firebasestorage.googleapis.com/v0/b/hod-and-deans.appspot.com/o/Faculty%20Profiles%2FNofPKGzvLefR7N229EPI7WiNdI93?alt=media&token=04a9ba67-655a-4f3c-a779-ace3daa2b9d5").into(navUserPhot);
+                    //navUserMail.setText(StudentDetails.getStudentName());
+                    //headerEmail.setText(facultyEmail);
+                    //headerID.setText(facultyId);
+
                 }
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Toast.makeText(MainActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(MainActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
     }
+
+
 }

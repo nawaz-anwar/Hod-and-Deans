@@ -13,6 +13,7 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="borderColor">#2196F3</color>
     <color name="btnBgColor">#FF9800</color>
+    <color name="bordercolor">#2196F3</color>
 
     <color name="zoom">#2D8CFF</color>
     <color name="meet">#1aa260</color>

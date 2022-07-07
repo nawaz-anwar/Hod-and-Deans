@@ -18,6 +18,7 @@ public class Accountdata {
 
     public Accountdata() {
     }
+
     public Accountdata(String imageAccount, String nameAccount, String emailAccount, String idAccount, String positionAccount, String passwordAccount) {
         this.imageAccount = imageAccount;
         this.nameAccount = nameAccount;
