@@ -34,9 +34,4 @@
         android:layout_height="wrap_content"
         android:text="Email: xyz@iimtu.net" />
 
-    <TextView
-        android:id="@+id/headerID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ID: xxxxxxxx" />
 </LinearLayout>

@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Toolbar toolbar;
     ActivityMainBinding binding;
     FirebaseAuth auth;
-    FirebaseUser currentUser ;
+    FirebaseUser currentUser;
     DatabaseReference database;
     String facultyImage, facultyName, facultyEmail, facultyId;
     CircleImageView headerImage;
@@ -89,9 +89,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbar);
-
-        auth = FirebaseAuth.getInstance();
-        currentUser = auth.getCurrentUser();
 
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.OpenDrawer, R.string.CloseDrawer);
@@ -183,25 +180,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         TextView navUserMail = headerView.findViewById(R.id.headerEmail);
         ImageView navUserPhot = headerView.findViewById(R.id.headerImage);
 
-        // now we will use Glide to load user image
-        // first we need to import the library
 
-        FirebaseDatabase.getInstance().getReference().child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("IIMTU").child("Faculty").child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
 
-                    //StudentDetails studentDetails = snapshot.getValue(StudentDetails.class);
-                    //acultyImage = snapshot.child("imageAccount").getValue().toString();
-                    //facultyName  = snapshot.child("studentName").getValue().toString();
-                    //facultyEmail = snapshot.child("emailAccount").getValue().toString();
-                    //facultyId = snapshot.child("facultyId").getValue().toString();
-                    navUsername.setText(snapshot.child("userName").getValue().toString());
-                    navUserMail.setText(snapshot.child("userEmail").getValue().toString());
-                    Glide.with(MainActivity.this).load("https://firebasestorage.googleapis.com/v0/b/hod-and-deans.appspot.com/o/Faculty%20Profiles%2FNofPKGzvLefR7N229EPI7WiNdI93?alt=media&token=04a9ba67-655a-4f3c-a779-ace3daa2b9d5").into(navUserPhot);
-                    //navUserMail.setText(StudentDetails.getStudentName());
-                    //headerEmail.setText(facultyEmail);
-                    //headerID.setText(facultyId);
+                    navUsername.setText(snapshot.child("facultyName").getValue().toString());
+                    navUserMail.setText(snapshot.child("facultyEmail").getValue().toString());
+                    String url = snapshot.child("facultyImage").getValue().toString();
+                    Glide.with(getApplicationContext()).load(url).into(navUserPhot);
 
                 }
             }
