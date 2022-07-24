@@ -244,7 +244,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Update and delete Account Office"
+                    android:text="Administrator"
                     android:gravity="center"
                     android:textStyle="bold"/>
             </LinearLayout>

@@ -1,6 +1,8 @@
 package com.coetusstudio.hodanddeans.Adapter;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import com.coetusstudio.hodanddeans.Models.NoticeData;
 import com.coetusstudio.hodanddeans.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class NoticeAdapter extends FirebaseRecyclerAdapter<NoticeData,NoticeAdapter.myviewholder> {
 
@@ -37,6 +40,34 @@ public class NoticeAdapter extends FirebaseRecyclerAdapter<NoticeData,NoticeAdap
                 .into(holder.notificationImage);
 
 
+        holder.notificationDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                AlertDialog.Builder builder=new AlertDialog.Builder(holder.notificationImage.getContext());
+                builder.setTitle("Warning");
+                builder.setMessage("Are you sure want to delete...?");
+
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        FirebaseDatabase.getInstance().getReference().child("Notice").child(getRef(position).getKey())
+                                .removeValue();
+                    }
+                });
+
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+
+                builder.show();
+            }
+        });
+
+
     } // End of OnBindViewMethod
 
     @NonNull
@@ -51,7 +82,7 @@ public class NoticeAdapter extends FirebaseRecyclerAdapter<NoticeData,NoticeAdap
     class myviewholder extends RecyclerView.ViewHolder
     {
         TextView notificationTitle, notificationDate, notificationTime;
-        ImageView notificationImage;
+        ImageView notificationImage, notificationDelete;
         public myviewholder(@NonNull View itemView)
         {
             super(itemView);
@@ -59,6 +90,7 @@ public class NoticeAdapter extends FirebaseRecyclerAdapter<NoticeData,NoticeAdap
             notificationImage=itemView.findViewById(R.id.notificationImage);
             notificationDate=itemView.findViewById(R.id.notificationDate);
             notificationTime=itemView.findViewById(R.id.notificationTime);
+            notificationDelete=itemView.findViewById(R.id.notificationDelete);
 
         }
     }
