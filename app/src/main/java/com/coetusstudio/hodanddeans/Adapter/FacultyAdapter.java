@@ -66,11 +66,11 @@ public class FacultyAdapter extends FirebaseRecyclerAdapter<AddFaculty,FacultyAd
                 .error(R.drawable.manimg)
                 .into(holder.img);
 
-        /*
+
         holder.edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final DialogPlus dialogPlus= DialogPlus.newDialog(holder.img.getContext())
+                final DialogPlus dialogPlus= DialogPlus.newDialog(holder.name.getContext())
                         .setContentHolder(new ViewHolder(R.layout.dialogfaculty))
                         .setExpanded(true,1500)
                         .create();
@@ -131,9 +131,9 @@ public class FacultyAdapter extends FirebaseRecyclerAdapter<AddFaculty,FacultyAd
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder=new AlertDialog.Builder(holder.img.getContext());
+                AlertDialog.Builder builder=new AlertDialog.Builder(holder.name.getContext());
                 builder.setTitle("Warning");
-                builder.setMessage("Are you sure want to delete Student Data...?");
+                builder.setMessage("Are you sure want to delete Faculty Data...?");
 
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
@@ -154,7 +154,6 @@ public class FacultyAdapter extends FirebaseRecyclerAdapter<AddFaculty,FacultyAd
             }
         });
 
-         */
     } // End of OnBindViewMethod
 
     @NonNull
@@ -181,8 +180,8 @@ public class FacultyAdapter extends FirebaseRecyclerAdapter<AddFaculty,FacultyAd
             subject=itemView.findViewById(R.id.facultyRcSubjectName);
             subjectCode=itemView.findViewById(R.id.facultyRcSubjectCode);
 
-            edit=(ImageView)itemView.findViewById(R.id.editRcAccount);
-            delete=(ImageView)itemView.findViewById(R.id.deleteRcAccount);
+            edit=(ImageView)itemView.findViewById(R.id.facultyRcEdit);
+            delete=(ImageView)itemView.findViewById(R.id.facultyRcDelete);
 
         }
     }
