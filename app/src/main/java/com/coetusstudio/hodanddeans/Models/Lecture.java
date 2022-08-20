@@ -2,23 +2,17 @@ package com.coetusstudio.hodanddeans.Models;
 
 public class Lecture {
 
-    String lectureName, lectureTiming, lectureLink, lectureDate, lectureTime;
+    String lectureName, lectureLink,lectureTiming, lectureDate, lectureTime;
 
-    public Lecture(String lectureName, String lectureTiming, String lectureLink, String lectureDate, String lectureTime) {
+    public Lecture(String lectureName, String lectureLink, String lectureTiming, String lectureDate, String lectureTime) {
         this.lectureName = lectureName;
-        this.lectureTiming = lectureTiming;
         this.lectureLink = lectureLink;
+        this.lectureTiming = lectureTiming;
         this.lectureDate = lectureDate;
         this.lectureTime = lectureTime;
     }
 
     public Lecture() {
-    }
-
-    public Lecture(String lectureName, String lectureTiming, String lectureLink) {
-        this.lectureName = lectureName;
-        this.lectureTiming = lectureTiming;
-        this.lectureLink = lectureLink;
     }
 
     public String getLectureName() {
@@ -29,20 +23,20 @@ public class Lecture {
         this.lectureName = lectureName;
     }
 
-    public String getLectureTiming() {
-        return lectureTiming;
-    }
-
-    public void setLectureTiming(String lectureTiming) {
-        this.lectureTiming = lectureTiming;
-    }
-
     public String getLectureLink() {
         return lectureLink;
     }
 
     public void setLectureLink(String lectureLink) {
         this.lectureLink = lectureLink;
+    }
+
+    public String getLectureTiming() {
+        return lectureTiming;
+    }
+
+    public void setLectureTiming(String lectureTiming) {
+        this.lectureTiming = lectureTiming;
     }
 
     public String getLectureDate() {

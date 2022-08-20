@@ -3,6 +3,7 @@ package com.coetusstudio.hodanddeans;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,10 +17,14 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class LivemeetingActivity extends AppCompatActivity {
 
     ActivityLivemeetingBinding binding;
     DatabaseReference reference;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +32,9 @@ public class LivemeetingActivity extends AppCompatActivity {
         binding = ActivityLivemeetingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
+        progressDialog = new ProgressDialog(LivemeetingActivity.this);
+        progressDialog.setTitle("Creating Meeting");
+        progressDialog.setMessage("Link Sending...");
 
         reference = FirebaseDatabase.getInstance().getReference().child("Lecture");
 
@@ -43,6 +50,7 @@ public class LivemeetingActivity extends AppCompatActivity {
         binding.btnSendLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressDialog.show();
                 if (binding.lectureLink.getEditText().getText().toString().isEmpty()) {
                     binding.lectureLink.setError("Empty");
                     binding.lectureLink.requestFocus();
@@ -89,15 +97,27 @@ public class LivemeetingActivity extends AppCompatActivity {
 
     private void sendlink() {
 
+        Calendar calForDate = Calendar.getInstance();
+        SimpleDateFormat currentDate = new SimpleDateFormat("dd-MM-yyyy");
+        String date = currentDate.format(calForDate.getTime());
+
+        Calendar calForTime = Calendar.getInstance();
+        SimpleDateFormat currentTime = new SimpleDateFormat("hh:mm a");
+        String time = currentTime.format(calForTime.getTime());
+
         String lectureName = binding.lectureName.getEditText().getText().toString();
         String lectureLink = binding.lectureLink.getEditText().getText().toString();
         String lectureTiming = binding.lectureTiming.getEditText().getText().toString();
-        Lecture lecture = new Lecture(lectureName,lectureLink,lectureTiming);
+        Lecture lecture = new Lecture(lectureName,lectureLink,lectureTiming,date,time);
+
 
         reference.push().setValue(lecture).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-                Toast.makeText(LivemeetingActivity.this, "Link sent to the student", Toast.LENGTH_SHORT).show();
+                binding.lectureName.getEditText().setText("");
+                binding.lectureLink.getEditText().setText("");
+                binding.lectureTiming.getEditText().setText("");
+                progressDialog.dismiss();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

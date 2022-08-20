@@ -307,7 +307,7 @@ public class AddfacultyActivity extends AppCompatActivity {
                                                 String imageUrl = uri.toString();
 
                                                 AddFaculty addFaculty= new AddFaculty(imageUrl, binding.nameFaculty.getEditText().getText().toString(),binding.emailFaculty.getEditText().getText().toString(),
-                                                        binding.idFaculty.getEditText().getText().toString(), item_subject, item_subjectCode, item_branch, item_division, item_classType, binding.passwordFaculty.getEditText().getText().toString());
+                                                        binding.idFaculty.getEditText().getText().toString(), item_subject, item_subjectCode, item_branch, item_division, item_classType, binding.passwordFaculty.getEditText().getText().toString(), auth.getUid());
 
 
                                                 database.getReference().child("IIMTU").child("Faculty").child(FirebaseAuth.getInstance().getUid()).setValue(addFaculty);
