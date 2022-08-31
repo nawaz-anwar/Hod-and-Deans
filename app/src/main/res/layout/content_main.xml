@@ -183,7 +183,7 @@
             android:layout_width="130dp"
             android:layout_height="150dp"
             android:layout_margin="10dp"
-            android:id="@+id/addAccountFaculty"
+            android:id="@+id/attendance"
             app:cardElevation="5dp">
 
             <LinearLayout
@@ -195,7 +195,7 @@
                 <ImageView
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:background="@drawable/office"
+                    android:background="@drawable/attendance"
                     android:padding="15dp"/>
 
                 <View
@@ -206,7 +206,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Add Account Office"
+                    android:text="Attendance"
                     android:gravity="center"
                     android:textStyle="bold"/>
             </LinearLayout>
@@ -221,7 +221,7 @@
             android:layout_width="130dp"
             android:layout_height="150dp"
             android:layout_margin="10dp"
-            android:id="@+id/updateDeleteAccount"
+            android:id="@+id/administrator"
             app:cardElevation="5dp">
 
             <LinearLayout

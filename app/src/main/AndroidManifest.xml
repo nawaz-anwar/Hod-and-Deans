@@ -14,68 +14,77 @@
         android:theme="@style/Theme.HodAndDeans"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".Create_Sessional_Title"
+            android:name=".Activity.Attendance.View_Subject_Attendance"
             android:exported="false" />
         <activity
-            android:name=".Create_New_Subject"
+            android:name=".Activity.Attendance.Download_Attendance"
             android:exported="false" />
         <activity
-            android:name=".CraeteBranchSectionActivity"
+            android:name=".Activity.Attendance.Delete_Attendance"
             android:exported="false" />
         <activity
-            android:name=".Create_New_Section"
+            android:name=".Activity.Attendance.Select_Subject_Attendance"
             android:exported="false" />
         <activity
-            android:name=".Create_New_Semester"
+            android:name=".Activity.Attendance.AttendanceActivity"
             android:exported="false" />
         <activity
-            android:name=".Create_New_Branch"
+            android:name=".Activity.Administrator.Create_Sessional_Title"
             android:exported="false" />
         <activity
-            android:name=".RecentnoticeActivity"
+            android:name=".Activity.Administrator.Create_New_Subject"
             android:exported="false" />
         <activity
-            android:name=".RecentmeetingActivity"
+            android:name=".Activity.Administrator.CraeteBranchSectionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Administrator.Create_New_Section"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Administrator.Create_New_Semester"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Administrator.Create_New_Branch"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Notification.RecentnoticeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Lecture.RecentmeetingActivity"
             android:exported="true"
             android:theme="@style/Theme.HodAndDeansNoAction" />
         <activity
-            android:name=".VerifyuserActivity"
+            android:name=".Activity.Home.VerifyuserActivity"
             android:exported="false" />
         <activity
-            android:name=".AddaccountfacultyActivity"
-            android:exported="false" />
-        <activity
-            android:name=".StudentdetailsActivity"
+            android:name=".Activity.Student.StudentdetailsActivity"
             android:exported="true"
             android:theme="@style/Theme.HodAndDeansNoAction" />
         <activity
-            android:name=".SentnotificationActivity"
+            android:name=".Activity.Notification.SentnotificationActivity"
             android:exported="false" />
         <activity
-            android:name=".UpdateanddeletefacultyActivity"
+            android:name=".Activity.Faculty.UpdateanddeletefacultyActivity"
             android:exported="true"
             android:theme="@style/Theme.HodAndDeansNoAction" />
         <activity
-            android:name=".CreateformActivity"
+            android:name=".Activity.Form.CreateformActivity"
             android:exported="false" />
         <activity
-            android:name=".LivemeetingActivity"
+            android:name=".Activity.Lecture.LivemeetingActivity"
             android:exported="false" />
         <activity
-            android:name=".ChatActivity"
+            android:name=".Activity.Faculty.AddfacultyActivity"
             android:exported="false" />
         <activity
-            android:name=".AddfacultyActivity"
+            android:name=".Activity.Home.SignupActivity"
             android:exported="false" />
         <activity
-            android:name=".SignupActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".Activity.Home.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.HodAndDeans.NoActionBar" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".Activity.Home.LoginActivity"
             android:exported="true"
             android:label="IIMTU HOD and Deans"
             android:theme="@style/Theme.HodAndDeans.NoActionBar">

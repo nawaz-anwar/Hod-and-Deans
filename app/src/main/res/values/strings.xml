@@ -24,4 +24,6 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string name="attendance_alert">*If you not find any subject option Please! check your net connection or wait 10-15 seconds</string>
 </resources>
