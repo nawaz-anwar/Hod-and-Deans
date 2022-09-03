@@ -6,34 +6,34 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-import com.coetusstudio.hodanddeans.Adapter.Notification.NoticeAdapter;
+import com.coetusstudio.hodanddeans.Adapter.Faculty.NoticeFacultyAdapter;
 import com.coetusstudio.hodanddeans.Models.Notification.NoticeData;
 import com.coetusstudio.hodanddeans.R;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class RecentnoticeActivity extends AppCompatActivity {
+public class RecentFacultyNotification extends AppCompatActivity {
 
     RecyclerView recviewNotice;
-    NoticeAdapter noticeAdapter;
+    NoticeFacultyAdapter noticeAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recentnotice);
+        setContentView(R.layout.activity_recent_faculty_notification);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(RecentnoticeActivity.this);
-        recviewNotice=(RecyclerView)findViewById(R.id.rcNotice);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recviewNotice=(RecyclerView)findViewById(R.id.rcFacultyNotice);
         recviewNotice.setLayoutManager(linearLayoutManager);
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
 
         FirebaseRecyclerOptions<NoticeData> options =
                 new FirebaseRecyclerOptions.Builder<NoticeData>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Notice").child("All Faculty And Students"), NoticeData.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Notice").child("Only Faculty"), NoticeData.class)
                         .build();
 
-        noticeAdapter=new NoticeAdapter(options);
+        noticeAdapter=new NoticeFacultyAdapter(options);
         recviewNotice.setAdapter(noticeAdapter);
     }
 

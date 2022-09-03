@@ -39,7 +39,7 @@ public class SentnotificationActivity extends AppCompatActivity {
     private ImageView addImg, noticeImageView;
     Uri filepath;
     private EditText noticeTitle;
-    private Button btnSendNotification, btnRecentNotification;
+    private Button btnSendNotification, btnRecentNotification, btnRecentFacultyNotification;
     StorageReference storageReference;
     DatabaseReference databaseReference;
     private ProgressDialog pd;
@@ -61,12 +61,21 @@ public class SentnotificationActivity extends AppCompatActivity {
         addImg = findViewById(R.id.addImg);
         noticeTitle = findViewById(R.id.noticeTitle);
         btnSendNotification = findViewById(R.id.btnSendNotification);
-        btnRecentNotification = findViewById(R.id.btnRecentNotification);
+        btnRecentNotification = findViewById(R.id.btnRecentStudentNotification);
+        btnRecentFacultyNotification = findViewById(R.id.btnRecentFacultyNotification);
 
         btnRecentNotification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SentnotificationActivity.this, RecentnoticeActivity.class);
+                Intent intent = new Intent(getApplicationContext(), RecentnoticeActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnRecentFacultyNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), RecentFacultyNotification.class);
                 startActivity(intent);
             }
         });

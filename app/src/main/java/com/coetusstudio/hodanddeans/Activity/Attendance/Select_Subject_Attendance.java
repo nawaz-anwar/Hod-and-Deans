@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
+import com.coetusstudio.hodanddeans.Models.Administrator.Section;
 import com.coetusstudio.hodanddeans.Models.Faculty.AddFaculty;
 import com.coetusstudio.hodanddeans.databinding.ActivitySelectSubjectAttendanceBinding;
 import com.google.firebase.database.DataSnapshot;
@@ -23,8 +24,8 @@ import java.util.List;
 public class Select_Subject_Attendance extends AppCompatActivity {
 
     ActivitySelectSubjectAttendanceBinding binding;
-    String facultySubject, facultySection, attendanceDate;
-    DatabaseReference dbSubjectRef, dbDateRef, dbSectionRef;
+    String facultySubject, facultySection;
+    DatabaseReference dbSubjectRef, dbSectionRef;
 
 
     @Override
@@ -33,9 +34,8 @@ public class Select_Subject_Attendance extends AppCompatActivity {
         binding = ActivitySelectSubjectAttendanceBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        dbDateRef = FirebaseDatabase.getInstance().getReference().child("AttendenRecordSheet");
         dbSubjectRef = FirebaseDatabase.getInstance().getReference().child("IIMTU").child("Faculty");
-        dbSectionRef = FirebaseDatabase.getInstance().getReference().child("IIMTU").child("Faculty");
+        dbSectionRef = FirebaseDatabase.getInstance().getReference().child("Section");
         dbSubjectRef.keepSynced(true);
 
         //Spinner for Section
@@ -64,9 +64,9 @@ public class Select_Subject_Attendance extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot dsp : dataSnapshot.getChildren()) {
 
-                    AddFaculty addFaculty=dsp.getValue(AddFaculty.class);
+                    Section section = dsp.getValue(Section.class);
 
-                    listSection.add(addFaculty.getFacultySection());
+                    listSection.add(section.getSection());
 
                 }
             }
@@ -158,10 +158,9 @@ public class Select_Subject_Attendance extends AppCompatActivity {
         binding.btnViewAttendanceByDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Select_Subject_Attendance.this, View_Subject_Attendance.class);
-                intent.putExtra("facultySubject",facultySubject);
-                intent.putExtra("facultySection",facultySection);
-                //intent.putExtra("attendanceDate",attendanceDate);
+                Intent intent = new Intent(getApplicationContext(), View_Collective_Attendance.class);
+                intent.putExtra("facultySubject1",facultySubject);
+                intent.putExtra("facultySection1",facultySection);
                 startActivity(intent);
             }
         });

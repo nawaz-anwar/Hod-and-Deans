@@ -50,7 +50,9 @@ public class StudentAdapter extends FirebaseRecyclerAdapter<StudentDetails,Stude
         holder.enrollment.setText(StudentDetails.getStudentEnrollmentNumber());
         holder.roll.setText(StudentDetails.getStudentRollNumber());
         holder.grade.setText(StudentDetails.getStudentGrade());
-        holder.attendance.setText(StudentDetails.getStudentAttendance());
+        holder.branch.setText(StudentDetails.getStudentBranch());
+        holder.semester.setText(StudentDetails.getStudentSemester());
+        holder.studentSection.setText(StudentDetails.getStudentSection());
         Glide.with(holder.img.getContext()).load(StudentDetails.getStudentImage())
                 .placeholder(R.drawable.manimg)
                 .circleCrop()
@@ -62,7 +64,7 @@ public class StudentAdapter extends FirebaseRecyclerAdapter<StudentDetails,Stude
             public void onClick(View view) {
                 final DialogPlus dialogPlus= DialogPlus.newDialog(holder.img.getContext())
                         .setContentHolder(new ViewHolder(R.layout.dialogstudent))
-                        .setExpanded(true,2000)
+                        .setExpanded(true,2250)
                         .create();
 
 
@@ -73,8 +75,10 @@ public class StudentAdapter extends FirebaseRecyclerAdapter<StudentDetails,Stude
                 final EditText rollNumber=myview.findViewById(R.id.updRollNumberStudent);
                 final EditText admissionNumber=myview.findViewById(R.id.updAdmissionNumberStudent);
                 final EditText enrollmentNumber=myview.findViewById(R.id.updEnrollmentNumberStudent);
+                final EditText branch=myview.findViewById(R.id.updBranchStudent);
+                final EditText semester=myview.findViewById(R.id.updSemesterStudent);
+                final EditText section=myview.findViewById(R.id.updSectionStudent);
                 final EditText grade=myview.findViewById(R.id.updGradeStudent);
-                final EditText attendance=myview.findViewById(R.id.updAttendanceStudent);
                 Button submit=myview.findViewById(R.id.updBtnStudent);
 
                 imageUrl.setText(StudentDetails.getStudentImage());
@@ -83,8 +87,10 @@ public class StudentAdapter extends FirebaseRecyclerAdapter<StudentDetails,Stude
                 rollNumber.setText(StudentDetails.getStudentRollNumber());
                 admissionNumber.setText(StudentDetails.getStudentAdmissionNumber());
                 enrollmentNumber.setText(StudentDetails.getStudentEnrollmentNumber());
+                branch.setText(StudentDetails.getStudentBranch());
+                semester.setText(StudentDetails.getStudentSemester());
+                section.setText(StudentDetails.getStudentSection());
                 grade.setText(StudentDetails.getStudentGrade());
-                attendance.setText(StudentDetails.getStudentAttendance());
                 dialogPlus.show();
 
                 submit.setOnClickListener(new View.OnClickListener() {
@@ -94,11 +100,13 @@ public class StudentAdapter extends FirebaseRecyclerAdapter<StudentDetails,Stude
                         map.put("studentImage",imageUrl.getText().toString());
                         map.put("studentName",name.getText().toString());
                         map.put("studentEmail",email.getText().toString());
-                        map.put("studentRollNumber",enrollmentNumber.getText().toString());
+                        map.put("studentRollNumber",rollNumber.getText().toString());
                         map.put("studentAdmissionNumber",admissionNumber.getText().toString());
                         map.put("studentEnrollmentNumber",enrollmentNumber.getText().toString());
+                        map.put("studentBranch",branch.getText().toString());
+                        map.put("studentSemester",semester.getText().toString());
+                        map.put("studentSection",section.getText().toString());
                         map.put("studentGrade",grade.getText().toString());
-                        map.put("studentAttendance",attendance.getText().toString());
 
 
                         FirebaseDatabase.getInstance().getReference().child("IIMTU").child("Student").child(getRef(position).getKey())
@@ -165,7 +173,7 @@ public class StudentAdapter extends FirebaseRecyclerAdapter<StudentDetails,Stude
     {
         CircleImageView img;
         ImageView edit,delete;
-        TextView name,branch,email,admission,enrollment,roll,fees,semester,grade,attendance;
+        TextView name,branch,email,admission,enrollment,roll,fees,semester, studentSection,grade;
         public myviewholder(@NonNull View itemView)
         {
             super(itemView);
@@ -175,10 +183,10 @@ public class StudentAdapter extends FirebaseRecyclerAdapter<StudentDetails,Stude
             admission=itemView.findViewById(R.id.studentAdmissionNumber);
             enrollment=itemView.findViewById(R.id.studentEnrollmentNumber);
             roll=itemView.findViewById(R.id.studentRollNumber);
-            //fees=itemView.findViewById(R.id.studentFees);
-            //semester=itemView.findViewById(R.id.studentSemester);
+            branch=itemView.findViewById(R.id.studentBranch);
+            semester=itemView.findViewById(R.id.studentSemester);
+            studentSection=itemView.findViewById(R.id.studentSection);
             grade=itemView.findViewById(R.id.studentGrade);
-            attendance=itemView.findViewById(R.id.studentAttendance);
 
             edit=(ImageView)itemView.findViewById(R.id.studentEdit);
             delete=(ImageView)itemView.findViewById(R.id.studentDelete);

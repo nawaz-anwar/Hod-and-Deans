@@ -7,17 +7,17 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/iimtulogo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/iimtulogo"
         android:supportsRtl="true"
         android:theme="@style/Theme.HodAndDeans"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".Activity.Attendance.View_Subject_Attendance"
+            android:name=".Activity.Home.SignupActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.Attendance.Download_Attendance"
+            android:name=".Activity.Notification.RecentFacultyNotification"
             android:exported="false" />
         <activity
             android:name=".Activity.Attendance.Delete_Attendance"
@@ -54,9 +54,6 @@
             android:exported="true"
             android:theme="@style/Theme.HodAndDeansNoAction" />
         <activity
-            android:name=".Activity.Home.VerifyuserActivity"
-            android:exported="false" />
-        <activity
             android:name=".Activity.Student.StudentdetailsActivity"
             android:exported="true"
             android:theme="@style/Theme.HodAndDeansNoAction" />
@@ -75,9 +72,6 @@
             android:exported="false" />
         <activity
             android:name=".Activity.Faculty.AddfacultyActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.Home.SignupActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.Home.MainActivity"

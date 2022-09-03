@@ -1,96 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="Update and Delete Student Data"
-        android:background="@color/colorPrimary"
-        android:textSize="25sp"
-        android:gravity="center"
-        android:textColor="#fff"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Image URL"
-        android:id="@+id/updImageStudent"
-        android:layout_marginTop="10dp"
-        android:textSize="20sp"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Name"
-        android:id="@+id/updNameStudent"
-        android:layout_marginTop="10dp"
-        android:textSize="20sp"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Email"
-        android:id="@+id/updEmailStudent"
-        android:layout_marginTop="10dp"
-        android:textSize="20sp"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Roll"
-        android:id="@+id/updRollNumberStudent"
-        android:layout_marginTop="10dp"
-        android:textSize="20sp"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Admission"
-        android:id="@+id/updAdmissionNumberStudent"
-        android:layout_marginTop="10dp"
-        android:textSize="20sp"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enrollment"
-        android:id="@+id/updEnrollmentNumberStudent"
-        android:layout_marginTop="10dp"
-        android:textSize="20sp"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Grade"
-        android:id="@+id/updGradeStudent"
-        android:layout_marginTop="10dp"
-        android:textSize="20sp"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Attendance"
-        android:id="@+id/updAttendanceStudent"
-        android:layout_marginTop="10dp"
-        android:textSize="20sp"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
 
-    <Button
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:text="Update Student"
-        android:id="@+id/updBtnStudent"
-        android:background="@color/colorPrimary"
-        android:textColor="#fff"
-        android:layout_gravity="center"
-        android:textSize="20sp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        />
 
-</LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Update and Delete Student Data"
+            android:background="@color/purple_200"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:textColor="#fff"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Image URL"
+            android:id="@+id/updImageStudent"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            android:id="@+id/updNameStudent"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:id="@+id/updEmailStudent"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Roll"
+            android:id="@+id/updRollNumberStudent"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Admission"
+            android:id="@+id/updAdmissionNumberStudent"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enrollment"
+            android:id="@+id/updEnrollmentNumberStudent"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Branch"
+            android:id="@+id/updBranchStudent"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Semester"
+            android:id="@+id/updSemesterStudent"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Section"
+            android:id="@+id/updSectionStudent"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Grade"
+            android:id="@+id/updGradeStudent"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"/>
+
+
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="Update Student"
+            android:id="@+id/updBtnStudent"
+            android:background="@color/purple_200"
+            android:textColor="#fff"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            />
+
+    </LinearLayout>
+
+</ScrollView>

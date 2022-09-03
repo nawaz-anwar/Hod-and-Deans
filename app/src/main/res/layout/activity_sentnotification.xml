@@ -71,25 +71,45 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
-        <com.google.android.material.button.MaterialButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnSendNotification"
-            android:layout_width="213dp"
-            android:layout_height="51dp"
+            android:layout_width="210dp"
+            android:layout_height="46dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/round_button"
-            android:layout_marginLeft="95dp"
             android:text="Send Notice"
-            android:textAllCaps="false" />
+            android:textColor="#000"
+            android:layout_gravity="center"
+            android:textSize="20sp" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnRecentNotification"
-            android:layout_width="213dp"
-            android:layout_height="51dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/round_button"
-            android:layout_marginLeft="95dp"
-            android:text="Recent Notice"
-            android:textAllCaps="false" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnRecentStudentNotification"
+                android:layout_width="188dp"
+                android:layout_height="46dp"
+                android:background="@drawable/round_button"
+                android:text="Students"
+                android:textColor="#000"
+                android:textSize="20sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnRecentFacultyNotification"
+                android:layout_width="188dp"
+                android:layout_height="46dp"
+                android:background="@drawable/round_button"
+                android:text="Faculty"
+                android:textColor="#000"
+                android:layout_marginLeft="5dp"
+                android:textSize="20sp" />
+
+        </LinearLayout>
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"

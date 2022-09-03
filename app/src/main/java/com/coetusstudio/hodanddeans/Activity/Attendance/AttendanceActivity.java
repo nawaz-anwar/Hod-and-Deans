@@ -34,13 +34,5 @@ public class AttendanceActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        binding.btnDownloadAttendance.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AttendanceActivity.this, Download_Attendance.class);
-                startActivity(intent);
-            }
-        });
     }
 }
