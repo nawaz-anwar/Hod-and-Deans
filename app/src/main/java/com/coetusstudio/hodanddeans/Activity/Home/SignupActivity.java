@@ -71,6 +71,13 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
+        binding.textBackLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                finish();
+            }
+        });
 
         binding.btnUserRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,12 +86,12 @@ public class SignupActivity extends AppCompatActivity {
                 auth.createUserWithEmailAndPassword(binding.userEmail.getEditText().getText().toString(), binding.userPassword.getEditText().getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        progressDialog.dismiss();
                         if(image != null) {
                             StorageReference reference = storage.getReference().child("User Profiles").child(auth.getUid());
                             reference.putFile(image).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                                    progressDialog.dismiss();
                                     if(task.isSuccessful()) {
                                         reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                             @Override
@@ -93,7 +100,7 @@ public class SignupActivity extends AppCompatActivity {
                                                 String imageUrl = uri.toString();
 
                                                 User user= new User(imageUrl, binding.userName.getEditText().getText().toString(),binding.userEmail.getEditText().getText().toString(),
-                                                        binding.userID.getEditText().getText().toString(), binding.userPosition.getEditText().getText().toString(), binding.userSchool.getEditText().getText().toString(), binding.userPassword.getEditText().getText().toString(), auth.getUid());
+                                                        binding.userID.getEditText().getText().toString(), binding.userPosition.getEditText().getText().toString(), binding.userSchool.getEditText().getText().toString().trim(), binding.userPassword.getEditText().getText().toString(), auth.getUid());
 
 
                                                 database.getReference().child("IIMTU").child("User").child(FirebaseAuth.getInstance().getUid()).setValue(user);

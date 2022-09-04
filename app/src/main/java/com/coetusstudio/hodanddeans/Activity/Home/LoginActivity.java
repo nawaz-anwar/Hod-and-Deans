@@ -39,8 +39,15 @@ public class LoginActivity extends AppCompatActivity {
         binding.txtSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(getApplicationContext(), ForgetPasswordActivity.class));
+                finish();
+            }
+        });
+
+        binding.btnRegisterNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), SignupActivity.class));
             }
         });
 
@@ -48,20 +55,24 @@ public class LoginActivity extends AppCompatActivity {
         binding.btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progressDialog.show();
-                auth.signInWithEmailAndPassword(binding.email.getEditText().getText().toString(), binding.password.getEditText().getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        progressDialog.dismiss();
-                        if (task.isSuccessful()){
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                            finish();
+                if (binding.email.getEditText().getText().toString().isEmpty() && binding.password.getEditText().getText().toString().isEmpty()){
+                    binding.email.requestFocus();
+                    Toast.makeText(getApplicationContext(), "Please! Enter Email and Password", Toast.LENGTH_SHORT).show();
+                }else {
+                    progressDialog.show();
+                    auth.signInWithEmailAndPassword(binding.email.getEditText().getText().toString(), binding.password.getEditText().getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            progressDialog.dismiss();
+                            if (task.isSuccessful()) {
+                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                finish();
+                            } else {
+                                Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
                         }
-                        else{
-                            Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                    });
+                }
             }
         });
     }

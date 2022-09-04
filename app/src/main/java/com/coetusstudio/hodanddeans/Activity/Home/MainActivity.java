@@ -114,10 +114,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Uri webpage = Uri.parse("https://www.iimtu.com/privacy-policy");
                     Intent webMeet = new Intent(Intent.ACTION_VIEW, webpage);
                     startActivity(webMeet);
+
                 } else if (id == R.id.aboutUs) {
                     Uri webpage = Uri.parse("https://www.iimtu.com/about-iimt/our-founder");
                     Intent webMeet = new Intent(Intent.ACTION_VIEW, webpage);
                     startActivity(webMeet);
+
+                } else if (id == R.id.resetPassword) {
+                    startActivity(new Intent(getApplicationContext(), ForgetPasswordActivity.class));
+
                 } else if (id == R.id.logout) {
                     Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                     startActivity(intent);
@@ -179,14 +184,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ImageView navUserPhot = headerView.findViewById(R.id.headerImage);
 
 
-        FirebaseDatabase.getInstance().getReference().child("IIMTU").child("Faculty").child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("IIMTU").child("User").child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
 
-                    navUsername.setText(snapshot.child("facultyName").getValue().toString());
-                    navUserMail.setText(snapshot.child("facultyEmail").getValue().toString());
-                    String url = snapshot.child("facultyImage").getValue().toString();
+                    navUsername.setText(snapshot.child("userName").getValue().toString());
+                    navUserMail.setText(snapshot.child("userEmail").getValue().toString());
+                    String url = snapshot.child("userImage").getValue().toString();
                     Glide.with(getApplicationContext()).load(url).into(navUserPhot);
 
                 }
