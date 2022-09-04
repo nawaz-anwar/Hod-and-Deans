@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 int id = item.getItemId();
 
                 if (id == R.id.profile) {
-                    Toast.makeText(MainActivity.this, "Profile", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(), UserActivity.class));
 
                 } else if (id == R.id.profileSendNotification) {
                     Intent intent = new Intent(MainActivity.this, SentnotificationActivity.class);
