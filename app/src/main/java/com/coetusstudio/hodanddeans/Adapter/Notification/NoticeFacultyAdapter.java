@@ -1,4 +1,4 @@
-package com.coetusstudio.hodanddeans.Adapter.Faculty;
+package com.coetusstudio.hodanddeans.Adapter.Notification;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -35,8 +35,8 @@ public class NoticeFacultyAdapter extends FirebaseRecyclerAdapter<NoticeData,Not
         holder.notificationDate.setText(NoticeData.getDate());
         holder.notificationTime.setText(NoticeData.getTime());
         Glide.with(holder.notificationImage.getContext()).load(NoticeData.getImage())
-                .placeholder(R.drawable.manimg)
-                .error(R.drawable.manimg)
+                .placeholder(R.drawable.noimage)
+                .error(R.drawable.noimage)
                 .into(holder.notificationImage);
 
         holder.notificationDelete.setOnClickListener(new View.OnClickListener() {
@@ -50,7 +50,7 @@ public class NoticeFacultyAdapter extends FirebaseRecyclerAdapter<NoticeData,Not
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        FirebaseDatabase.getInstance().getReference().child("Notice").child(getRef(position).getKey())
+                        FirebaseDatabase.getInstance().getReference().child("Notice").child("Only Faculty").child(getRef(position).getKey())
                                 .removeValue();
                     }
                 });

@@ -1,24 +1,25 @@
 package com.coetusstudio.hodanddeans.Models.Notification;
 
 public class NoticeData {
-    String title, image, date, time, key;
+    String title, image, date, time, facultyImage;
 
-    public NoticeData(String title, String image, String date, String time, String key) {
+    public NoticeData(String title, String image, String date, String time, String facultyImage) {
         this.title = title;
         this.image = image;
         this.date = date;
         this.time = time;
-        this.key = key;
+        this.facultyImage = facultyImage;
     }
 
     public NoticeData() {
     }
 
-    public NoticeData(String s, String toString) {
+    public NoticeData(String title, String date, String time, String facultyImage) {
         this.title = title;
-        this.image = image;
+        this.date = date;
+        this.time = time;
+        this.facultyImage = facultyImage;
     }
-
 
     public String getTitle() {
         return title;
@@ -52,11 +53,11 @@ public class NoticeData {
         this.time = time;
     }
 
-    public String getKey() {
-        return key;
+    public String getFacultyImage() {
+        return facultyImage;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setFacultyImage(String facultyImage) {
+        this.facultyImage = facultyImage;
     }
 }

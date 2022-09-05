@@ -1,5 +1,6 @@
 package com.coetusstudio.hodanddeans.Activity.Notification;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -10,7 +11,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -18,9 +22,16 @@ import android.widget.Toast;
 
 import com.coetusstudio.hodanddeans.Models.Notification.NoticeData;
 import com.coetusstudio.hodanddeans.R;
+import com.coetusstudio.hodanddeans.databinding.ActivitySentnotificationBinding;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -32,56 +43,97 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
 public class SentnotificationActivity extends AppCompatActivity {
 
-    private CardView sendNotification;
-    private Bitmap bitmap;
-    private ImageView addImg, noticeImageView;
+    ActivitySentnotificationBinding binding;
     Uri filepath;
-    private EditText noticeTitle;
-    private Button btnSendNotification, btnRecentNotification, btnRecentFacultyNotification;
+    Boolean isImageUploaded = false;
     StorageReference storageReference;
     DatabaseReference databaseReference;
     private ProgressDialog pd;
+    FirebaseAuth auth;
+    FirebaseUser currentUser;
+    String facultyImage, notificationType;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sentnotification);
-
-
+        binding = ActivitySentnotificationBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         pd = new ProgressDialog(this);
+
+        auth = FirebaseAuth.getInstance();
+        currentUser = auth.getCurrentUser();
 
         storageReference= FirebaseStorage.getInstance().getReference();
         databaseReference= FirebaseDatabase.getInstance().getReference();
 
-        sendNotification = findViewById(R.id.sendNotification);
-        noticeImageView = findViewById(R.id.noticeImageView);
-        addImg = findViewById(R.id.addImg);
-        noticeTitle = findViewById(R.id.noticeTitle);
-        btnSendNotification = findViewById(R.id.btnSendNotification);
-        btnRecentNotification = findViewById(R.id.btnRecentStudentNotification);
-        btnRecentFacultyNotification = findViewById(R.id.btnRecentFacultyNotification);
+        // Spinner Notification Type
+        final List<String> lstfacsub=new ArrayList<String>();
+        lstfacsub.add("Select Notification Type*");
+        lstfacsub.add("All Faculty And Students");
+        lstfacsub.add("Only Faculty");
 
-        btnRecentNotification.setOnClickListener(new View.OnClickListener() {
+        ArrayAdapter<String> AttendanceTypeSubArrayAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,lstfacsub);
+        AttendanceTypeSubArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.spinnerNotificationType.setAdapter(AttendanceTypeSubArrayAdapter);
+
+        binding.spinnerNotificationType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), RecentnoticeActivity.class);
-                startActivity(intent);
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                notificationType=parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
-        btnRecentFacultyNotification.setOnClickListener(new View.OnClickListener() {
+        FirebaseDatabase.getInstance().getReference().child("IIMTU").child("Faculty").child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), RecentFacultyNotification.class);
-                startActivity(intent);
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    facultyImage = snapshot.child("facultyImage").getValue().toString();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
 
+        binding.btnRecentStudentNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), RecentnoticeActivity.class));
+            }
+        });
 
-        addImg.setOnClickListener(new View.OnClickListener() {
+        binding.btnRecentFacultyNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), RecentFacultyNotification.class));
+            }
+        });
+
+        Calendar calForDate = Calendar.getInstance();
+        SimpleDateFormat currentDate = new SimpleDateFormat("dd-MM-yyyy");
+        String date = currentDate.format(calForDate.getTime());
+
+        Calendar calForTime = Calendar.getInstance();
+        SimpleDateFormat currentTime = new SimpleDateFormat("hh:mm a");
+        String time = currentTime.format(calForTime.getTime());
+
+
+        binding.addImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Dexter.withContext(getApplicationContext())
@@ -108,14 +160,44 @@ public class SentnotificationActivity extends AppCompatActivity {
             }
         });
 
-        btnSendNotification.setOnClickListener(new View.OnClickListener() {
+        binding.btnSendNotification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                processupload(filepath);
+                if (isImageUploaded.equals(false)){
+
+                    uploadNotice(date,time);
+                }else {
+                    processupload(filepath, date, time);
+                }
             }
         });
 
     }
+
+    private void uploadNotice(String date, String time) {
+        if (binding.noticeTitle.getEditableText().toString().isEmpty()){
+            Toast.makeText(getApplicationContext(),"Please! Enter Notice Description",Toast.LENGTH_SHORT).show();
+        }else {
+            Log.i("Notification", "Without image");
+            NoticeData noticeData = new NoticeData(binding.noticeTitle.getEditableText().toString(), date, time, facultyImage);
+            databaseReference.child("Notice").child(notificationType).child(databaseReference.push().getKey()).setValue(noticeData).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    Toast.makeText(getApplicationContext(), "Notice Uploaded", Toast.LENGTH_SHORT).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(), "Please, try again later!", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            //pd.dismiss();
+
+            binding.noticeTitle.setText("");
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -123,46 +205,53 @@ public class SentnotificationActivity extends AppCompatActivity {
         if(requestCode==101 && resultCode==RESULT_OK)
         {
             filepath=data.getData();
-            noticeImageView.setImageURI(data.getData());
+            binding.noticeImageView.setImageURI(data.getData());
+            isImageUploaded = true;
+        }else {
+            //processupload(filepath);
         }
     }
-    public void processupload(Uri filepath)
+    public void processupload(Uri filepath, String date, String time)
     {
         final ProgressDialog pd=new ProgressDialog(this);
         pd.setTitle("Notice Uploading....!!!");
         pd.show();
 
-        final StorageReference reference=storageReference.child("Notice Data/"+System.currentTimeMillis()+".pdf");
-        reference.putFile(filepath)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                        reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
+        if (notificationType.equals("Select Notification Type*")){
+            Toast.makeText(getApplicationContext(), "Please! Select Notification Type", Toast.LENGTH_SHORT).show();
+        }else {
+            final StorageReference reference = storageReference.child("Notice Data/" + System.currentTimeMillis() + ".pdf");
+            reference.putFile(filepath)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                                NoticeData noticeData=new NoticeData(noticeTitle.getText().toString(),uri.toString());
-                                databaseReference.child("Notice").child(databaseReference.push().getKey()).setValue(noticeData);
+                            reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
 
-                                pd.dismiss();
-                                Toast.makeText(getApplicationContext(),"Notice Uploaded",Toast.LENGTH_LONG).show();
+                                    NoticeData noticeData = new NoticeData(binding.noticeTitle.getEditableText().toString(), uri.toString(), date, time, facultyImage);
+                                    databaseReference.child("Notice").child(notificationType).child(databaseReference.push().getKey()).setValue(noticeData);
+
+                                    pd.dismiss();
+                                    Toast.makeText(getApplicationContext(), "Notice Uploaded", Toast.LENGTH_LONG).show();
 
 
-                                noticeTitle.setText("");
-                                noticeImageView.setVisibility(View.INVISIBLE);
-                            }
-                        });
+                                    binding.noticeTitle.setText("");
+                                    binding.noticeImageView.setVisibility(View.INVISIBLE);
+                                }
+                            });
 
-                    }
-                })
-                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                        float percent=(100*taskSnapshot.getBytesTransferred())/taskSnapshot.getTotalByteCount();
-                        pd.setMessage("Uploaded :"+(int)percent+"%");
-                    }
-                });
-
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            float percent = (100 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                            pd.setMessage("Uploaded :" + (int) percent + "%");
+                        }
+                    });
+        }
     }
 }

@@ -35,8 +35,8 @@ public class NoticeAdapter extends FirebaseRecyclerAdapter<NoticeData,NoticeAdap
         holder.notificationDate.setText(NoticeData.getDate());
         holder.notificationTime.setText(NoticeData.getTime());
         Glide.with(holder.notificationImage.getContext()).load(NoticeData.getImage())
-                .placeholder(R.drawable.manimg)
-                .error(R.drawable.manimg)
+                .placeholder(R.drawable.noimage)
+                .error(R.drawable.noimage)
                 .into(holder.notificationImage);
 
 
@@ -51,7 +51,7 @@ public class NoticeAdapter extends FirebaseRecyclerAdapter<NoticeData,NoticeAdap
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        FirebaseDatabase.getInstance().getReference().child("Notice").child(getRef(position).getKey())
+                        FirebaseDatabase.getInstance().getReference().child("Notice").child("All Faculty And Students").child(getRef(position).getKey())
                                 .removeValue();
                     }
                 });

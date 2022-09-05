@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-import com.coetusstudio.hodanddeans.Adapter.Faculty.NoticeFacultyAdapter;
+import com.coetusstudio.hodanddeans.Adapter.Notification.NoticeFacultyAdapter;
 import com.coetusstudio.hodanddeans.Models.Notification.NoticeData;
 import com.coetusstudio.hodanddeans.R;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
