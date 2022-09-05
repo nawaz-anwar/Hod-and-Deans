@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.Attendance.View_Collective_Attendance">
+    tools:context=".Activity.Attendance.View_Attendance">
 
     <TextView
         android:id="@+id/textViewSubject"

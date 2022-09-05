@@ -53,8 +53,9 @@
             android:layout_marginLeft="5sp"
             android:textSize="10sp"/>
 
+
         <Spinner
-            android:id="@+id/spinnerAttendanceDelete"
+            android:id="@+id/spinnerDateAttendanceDelete"
             android:background="@drawable/spinnerbg"
             android:layout_width="match_parent"
             android:layout_height="50dp"

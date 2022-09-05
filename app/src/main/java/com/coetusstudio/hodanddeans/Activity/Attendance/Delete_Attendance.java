@@ -1,16 +1,114 @@
 package com.coetusstudio.hodanddeans.Activity.Attendance;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
+import com.coetusstudio.hodanddeans.Models.Administrator.Section;
+import com.coetusstudio.hodanddeans.Models.Faculty.AddFaculty;
 import com.coetusstudio.hodanddeans.R;
+import com.coetusstudio.hodanddeans.databinding.ActivityDeleteAttendanceBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Delete_Attendance extends AppCompatActivity {
+
+    ActivityDeleteAttendanceBinding binding;
+    String facultySubject, facultySection, attendanceDate;
+    DatabaseReference dbSubjectRef, dbDateRef;
+    ProgressDialog mDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_delete_attendance);
+        binding = ActivityDeleteAttendanceBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        mDialog = new ProgressDialog(this);
+        mDialog.setTitle("Delete");
+        mDialog.setMessage("Attendance Deleting...");
+        mDialog.setCanceledOnTouchOutside(false);
+
+        Intent intent = getIntent();
+        facultySection = intent.getStringExtra("facultySection2");
+        facultySubject = intent.getStringExtra("facultySubject2");
+
+
+        dbDateRef = FirebaseDatabase.getInstance().getReference().child("AttendenRecordSheet");
+        dbDateRef.keepSynced(true);
+
+
+        //Spinner for Date And Time
+        final List<String> listSubject = new ArrayList<String>();
+        listSubject.add("Select Date");
+
+        ArrayAdapter<String> subjectArrayAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, listSubject);
+        subjectArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.spinnerDateAttendanceDelete.setAdapter(subjectArrayAdapter);
+
+        binding.spinnerDateAttendanceDelete.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                attendanceDate = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        dbDateRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot dsp : dataSnapshot.child(facultySection).child(facultySubject).getChildren()) {
+
+                    listSubject.add(dsp.getKey());
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+        binding.btnDeleteAttendanceByDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDialog.show();
+                dbDateRef.child(facultySection).child(facultySubject).child(attendanceDate).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            mDialog.dismiss();
+                            Toast.makeText(getApplicationContext(), "Attendance Record Delete Successfully", Toast.LENGTH_SHORT).show();
+                            binding.spinnerDateAttendanceDelete.getEmptyView();
+                        }
+                    }
+                });
+            }
+        });
+
     }
 }

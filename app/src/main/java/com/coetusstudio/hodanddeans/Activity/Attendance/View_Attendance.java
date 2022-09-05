@@ -20,7 +20,7 @@ import android.widget.TextView;
 import com.coetusstudio.hodanddeans.Models.Administrator.Attendance;
 import com.coetusstudio.hodanddeans.Models.Students.StudentDetails;
 import com.coetusstudio.hodanddeans.R;
-import com.coetusstudio.hodanddeans.databinding.ActivityViewCollectiveAttendanceBinding;
+import com.coetusstudio.hodanddeans.databinding.ActivityViewAttendanceBinding;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,9 +29,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class View_Collective_Attendance extends AppCompatActivity {
+public class View_Attendance extends AppCompatActivity {
 
-    ActivityViewCollectiveAttendanceBinding binding;
+    ActivityViewAttendanceBinding binding;
     String subid,SubName;
     int tpresent = 0;
     int tattencount = 0;
@@ -47,14 +47,14 @@ public class View_Collective_Attendance extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityViewCollectiveAttendanceBinding.inflate(getLayoutInflater());
+        binding = ActivityViewAttendanceBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         Intent intent=getIntent();
-        SubName=intent.getStringExtra("facultySubject");
-        subid=intent.getStringExtra("facultySection");
+        SubName=intent.getStringExtra("facultySubject1");
+        subid=intent.getStringExtra("facultySection1");
 
-        //binding.textViewSubject.setText(SubName);
+        binding.textViewSubject.setText(SubName);
 
         //implementation of recycler view
 
@@ -218,6 +218,5 @@ public class View_Collective_Attendance extends AppCompatActivity {
                 percenttv = v.findViewById(R.id.percentage_input_tv);
             }
         }
-
     }
 }

@@ -40,6 +40,7 @@
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_user.xml" value="0.1703125" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_verification.xml" value="0.1" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_verifyuser.xml" value="0.1" />
+        <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_view_attendance.xml" value="0.1703125" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_view_collective_attendance.xml" value="0.184375" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_view_subject_attendance.xml" value="0.184375" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/app_bar_main.xml" value="0.16666666666666666" />
@@ -56,7 +57,7 @@
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/singlenotice.xml" value="0.22" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/singlerowaccount.xml" value="0.184375" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/singlerowcollectiveattendance.xml" value="0.184375" />
-        <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/singlerowfaculty.xml" value="0.16666666666666666" />
+        <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/singlerowfaculty.xml" value="0.3333333333333333" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/singlerowstudents.xml" value="0.22" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/menu/activity_main_drawer.xml" value="0.184375" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/menu/main.xml" value="0.184375" />

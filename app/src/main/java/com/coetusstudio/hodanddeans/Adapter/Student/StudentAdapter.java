@@ -64,12 +64,11 @@ public class StudentAdapter extends FirebaseRecyclerAdapter<StudentDetails,Stude
             public void onClick(View view) {
                 final DialogPlus dialogPlus= DialogPlus.newDialog(holder.img.getContext())
                         .setContentHolder(new ViewHolder(R.layout.dialogstudent))
-                        .setExpanded(true,2250)
+                        .setExpanded(true,1900)
                         .create();
 
 
                 View myview=dialogPlus.getHolderView();
-                final EditText imageUrl=myview.findViewById(R.id.updImageStudent);
                 final EditText name=myview.findViewById(R.id.updNameStudent);
                 final EditText email=myview.findViewById(R.id.updEmailStudent);
                 final EditText rollNumber=myview.findViewById(R.id.updRollNumberStudent);
@@ -81,7 +80,7 @@ public class StudentAdapter extends FirebaseRecyclerAdapter<StudentDetails,Stude
                 final EditText grade=myview.findViewById(R.id.updGradeStudent);
                 Button submit=myview.findViewById(R.id.updBtnStudent);
 
-                imageUrl.setText(StudentDetails.getStudentImage());
+
                 name.setText(StudentDetails.getStudentName());
                 email.setText(StudentDetails.getStudentEmail());
                 rollNumber.setText(StudentDetails.getStudentRollNumber());
@@ -97,7 +96,6 @@ public class StudentAdapter extends FirebaseRecyclerAdapter<StudentDetails,Stude
                     @Override
                     public void onClick(View view) {
                         Map<String,Object> map=new HashMap<>();
-                        map.put("studentImage",imageUrl.getText().toString());
                         map.put("studentName",name.getText().toString());
                         map.put("studentEmail",email.getText().toString());
                         map.put("studentRollNumber",rollNumber.getText().toString());

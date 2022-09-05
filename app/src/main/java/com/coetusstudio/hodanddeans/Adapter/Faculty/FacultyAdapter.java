@@ -48,6 +48,9 @@ public class FacultyAdapter extends FirebaseRecyclerAdapter<AddFaculty,FacultyAd
         holder.id.setText(AddFaculty.getFacultyId());
         holder.subject.setText(AddFaculty.getFacultySubject());
         holder.subjectCode.setText(AddFaculty.getFacultySubjectCode());
+        holder.department.setText(AddFaculty.getFacultyBranch());
+        holder.semester.setText(AddFaculty.getFacultySemester());
+        holder.section.setText(AddFaculty.getFacultySection());
         Glide.with(holder.img.getContext()).load(AddFaculty.getFacultyImage())
                 .placeholder(R.drawable.manimg)
                 .circleCrop()
@@ -60,38 +63,43 @@ public class FacultyAdapter extends FirebaseRecyclerAdapter<AddFaculty,FacultyAd
             public void onClick(View view) {
                 final DialogPlus dialogPlus= DialogPlus.newDialog(holder.name.getContext())
                         .setContentHolder(new ViewHolder(R.layout.dialogfaculty))
-                        .setExpanded(true,1500)
+                        .setExpanded(true,1900)
                         .create();
 
 
                 View myview=dialogPlus.getHolderView();
-                final EditText imageUrl=myview.findViewById(R.id.updImageFaculty);
                 final EditText name=myview.findViewById(R.id.updNameFaculty);
                 final EditText email=myview.findViewById(R.id.updEmailFaculty);
                 final EditText id=myview.findViewById(R.id.updIdFaculty);
                 final EditText subject=myview.findViewById(R.id.updSubjectFaculty);
                 final EditText subjectCode=myview.findViewById(R.id.updSubjectCodeFaculty);
+                final EditText department=myview.findViewById(R.id.updDepartmentFaculty);
+                final EditText semester=myview.findViewById(R.id.updSemesterFaculty);
+                final EditText section=myview.findViewById(R.id.updSectionFaculty);
                 Button submit=myview.findViewById(R.id.updBtnFaculty);
 
-
-                imageUrl.setText(AddFaculty.getFacultyImage());
                 name.setText(AddFaculty.getFacultyName());
                 email.setText(AddFaculty.getFacultyEmail());
                 id.setText(AddFaculty.getFacultyId());
                 subject.setText(AddFaculty.getFacultySubject());
-                subject.setText(AddFaculty.getFacultySubjectCode());
+                subjectCode.setText(AddFaculty.getFacultySubjectCode());
+                department.setText(AddFaculty.getFacultyBranch());
+                semester.setText(AddFaculty.getFacultySemester());
+                section.setText(AddFaculty.getFacultySection());
                 dialogPlus.show();
 
                 submit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Map<String,Object> map=new HashMap<>();
-                        map.put("facultyImage",imageUrl.getText().toString());
                         map.put("facultyName",name.getText().toString());
                         map.put("facultyEmail",email.getText().toString());
                         map.put("facultyId",id.getText().toString());
                         map.put("facultySubject",subject.getText().toString());
                         map.put("facultySubjectCode",subjectCode.getText().toString());
+                        map.put("facultyBranch",department.getText().toString());
+                        map.put("facultySemester",semester.getText().toString());
+                        map.put("facultySection",section.getText().toString());
 
                         FirebaseDatabase.getInstance().getReference().child("IIMTU").child("Faculty").child(getRef(position).getKey())
                                 .updateChildren(map)
@@ -157,7 +165,7 @@ public class FacultyAdapter extends FirebaseRecyclerAdapter<AddFaculty,FacultyAd
     {
         CircleImageView img;
         ImageView edit,delete;
-        TextView name,email,id,subject,subjectCode,admission,enrollment,roll,fees,semester,grade,attendance;
+        TextView name,email,id,subject,subjectCode,department,semester,section;
         public myviewholder(@NonNull View itemView)
         {
             super(itemView);
@@ -167,6 +175,9 @@ public class FacultyAdapter extends FirebaseRecyclerAdapter<AddFaculty,FacultyAd
             id=itemView.findViewById(R.id.facultyRcId);
             subject=itemView.findViewById(R.id.facultyRcSubjectName);
             subjectCode=itemView.findViewById(R.id.facultyRcSubjectCode);
+            department=itemView.findViewById(R.id.facultyRcDepartment);
+            semester=itemView.findViewById(R.id.facultyRcSemester);
+            section=itemView.findViewById(R.id.facultyRcSection);
 
             edit=(ImageView)itemView.findViewById(R.id.facultyRcEdit);
             delete=(ImageView)itemView.findViewById(R.id.facultyRcDelete);

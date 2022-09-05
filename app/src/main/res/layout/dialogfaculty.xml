@@ -18,14 +18,6 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Image URL"
-        android:id="@+id/updImageFaculty"
-        android:layout_marginTop="10dp"
-        android:textSize="20sp"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:hint="Name"
         android:id="@+id/updNameFaculty"
         android:layout_marginTop="10dp"
@@ -62,6 +54,31 @@
         android:id="@+id/updSubjectCodeFaculty"
         android:layout_marginTop="10dp"
         android:textSize="20sp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Department"
+        android:id="@+id/updDepartmentFaculty"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Semseter"
+        android:id="@+id/updSemesterFaculty"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Subject Code"
+        android:id="@+id/updSectionFaculty"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"/>
+
     <Button
         android:layout_width="300dp"
         android:layout_height="wrap_content"
