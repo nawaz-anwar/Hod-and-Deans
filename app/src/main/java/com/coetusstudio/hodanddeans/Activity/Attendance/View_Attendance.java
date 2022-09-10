@@ -82,7 +82,7 @@ public class View_Attendance extends AppCompatActivity {
 
 
         //start quaring with student step 1 getting name and sid from here
-        FirebaseDatabase.getInstance().getReference().child("IIMTU").child("Student").addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("Student Data").child(subid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 

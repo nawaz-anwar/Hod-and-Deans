@@ -14,6 +14,18 @@
         android:theme="@style/Theme.HodAndDeans"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".SelectionType"
+            android:exported="false" />
+        <activity
+            android:name=".SelectSectionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SelectSecionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SelectSectionFaculty"
+            android:exported="false" />
+        <activity
             android:name=".Activity.Attendance.View_Attendance"
             android:exported="false" />
         <activity

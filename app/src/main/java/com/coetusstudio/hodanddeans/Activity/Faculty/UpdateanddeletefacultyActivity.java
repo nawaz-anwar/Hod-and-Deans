@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,11 +18,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class UpdateanddeletefacultyActivity extends AppCompatActivity {
 
-
-
     RecyclerView recviewFaculty;
     FacultyAdapter facultyAdapter;
-
+    String section;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +28,15 @@ public class UpdateanddeletefacultyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_updateanddeletefaculty);
         setTitle("Enter ID");
 
-
+        Intent intent = getIntent();
+        section = intent.getStringExtra("section");
 
         recviewFaculty=(RecyclerView)findViewById(R.id.rcFactulty);
         recviewFaculty.setLayoutManager(new LinearLayoutManager(this));
 
         FirebaseRecyclerOptions<AddFaculty> options =
                 new FirebaseRecyclerOptions.Builder<AddFaculty>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("IIMTU").child("Faculty"), AddFaculty.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Faculty Data").child(section), AddFaculty.class)
                         .build();
 
         facultyAdapter=new FacultyAdapter(options);

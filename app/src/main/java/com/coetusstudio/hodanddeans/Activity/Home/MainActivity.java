@@ -12,13 +12,14 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.coetusstudio.hodanddeans.Activity.Administrator.CraeteBranchSectionActivity;
 import com.coetusstudio.hodanddeans.Activity.Faculty.AddfacultyActivity;
+import com.coetusstudio.hodanddeans.Activity.Faculty.SelectionType;
 import com.coetusstudio.hodanddeans.Activity.Student.StudentdetailsActivity;
 import com.coetusstudio.hodanddeans.Activity.Attendance.AttendanceActivity;
 import com.coetusstudio.hodanddeans.Activity.Form.CreateformActivity;
 import com.coetusstudio.hodanddeans.Activity.Lecture.LivemeetingActivity;
 import com.coetusstudio.hodanddeans.R;
 import com.coetusstudio.hodanddeans.Activity.Notification.SentnotificationActivity;
-import com.coetusstudio.hodanddeans.Activity.Faculty.UpdateanddeletefacultyActivity;
+import com.coetusstudio.hodanddeans.SelectSectionActivity;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
@@ -157,8 +158,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.liveMeeting:
                 Intent intent3 = new Intent(MainActivity.this, LivemeetingActivity.class);
                 startActivity(intent3);
+                break;
             case R.id.updateDeleteFaculty:
-                Intent intent4 = new Intent(MainActivity.this, UpdateanddeletefacultyActivity.class);
+                Intent intent4 = new Intent(MainActivity.this, SelectSectionActivity.class);
                 startActivity(intent4);
                 break;
             case R.id.administrator:

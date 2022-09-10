@@ -305,7 +305,7 @@ public class AddfacultyActivity extends AppCompatActivity {
                                                         binding.idFaculty.getEditText().getText().toString(), item_subject, item_subjectCode, item_branch, item_division, item_classType, binding.passwordFaculty.getEditText().getText().toString(), auth.getUid());
 
 
-                                                database.getReference().child("IIMTU").child("Faculty").child(FirebaseAuth.getInstance().getUid()).setValue(addFaculty);
+                                                database.getReference().child("Faculty Data").child(addFaculty.getFacultySection()).child(FirebaseAuth.getInstance().getUid()).setValue(addFaculty);
                                             }
                                         });
                                     }

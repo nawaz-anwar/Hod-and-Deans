@@ -48,6 +48,14 @@
                 app:layout_constraintVertical_bias="0.08"
                 android:src="@drawable/manimg" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Click here to Upload Image"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"
+                android:textStyle="bold"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/nameFaculty" style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
