@@ -10,10 +10,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import com.coetusstudio.hodanddeans.Activity.Faculty.UpdateanddeletefacultyActivity;
+import com.coetusstudio.hodanddeans.Activity.Student.StudentdetailsActivity;
 import com.coetusstudio.hodanddeans.Models.Administrator.Section;
 import com.coetusstudio.hodanddeans.Models.Administrator.Semester;
 import com.coetusstudio.hodanddeans.R;
-import com.coetusstudio.hodanddeans.databinding.ActivitySelectSectionBinding;
+import com.coetusstudio.hodanddeans.databinding.ActivitySelectSectionStudentBinding;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,16 +24,16 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectSectionActivity extends AppCompatActivity {
+public class SelectSectionStudent extends AppCompatActivity {
 
-    ActivitySelectSectionBinding binding;
+    ActivitySelectSectionStudentBinding binding;
     String semester, section;
     DatabaseReference dbSemesterRef, dbSectionRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivitySelectSectionBinding.inflate(getLayoutInflater());
+        binding = ActivitySelectSectionStudentBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         dbSemesterRef = FirebaseDatabase.getInstance().getReference().child("Semester");
@@ -46,9 +47,9 @@ public class SelectSectionActivity extends AppCompatActivity {
 
         ArrayAdapter<String> SemesterArrayAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, listSemester);
         SemesterArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        binding.spinnerSemesterFacultyData.setAdapter(SemesterArrayAdapter);
+        binding.spinnerSemesterStudentData.setAdapter(SemesterArrayAdapter);
 
-        binding.spinnerSemesterFacultyData.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        binding.spinnerSemesterStudentData.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 semester = parent.getItemAtPosition(position).toString();
@@ -85,9 +86,9 @@ public class SelectSectionActivity extends AppCompatActivity {
 
         ArrayAdapter<String> SectionArrayAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, listSection);
         SectionArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        binding.spinnerSectionFacultyData.setAdapter(SectionArrayAdapter);
+        binding.spinnerSectionStudentData.setAdapter(SectionArrayAdapter);
 
-        binding.spinnerSectionFacultyData.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        binding.spinnerSectionStudentData.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 section = parent.getItemAtPosition(position).toString();
@@ -118,15 +119,14 @@ public class SelectSectionActivity extends AppCompatActivity {
             }
         });
 
-            binding.btnFacultyData.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(getApplicationContext(), UpdateanddeletefacultyActivity.class);
-                    intent.putExtra("semester", semester);
-                    intent.putExtra("section", section);
-                    startActivity(intent);
-                }
-            });
-
+        binding.btnStudentData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), StudentdetailsActivity.class);
+                intent.putExtra("semester",semester);
+                intent.putExtra("section",section);
+                startActivity(intent);
+            }
+        });
     }
 }

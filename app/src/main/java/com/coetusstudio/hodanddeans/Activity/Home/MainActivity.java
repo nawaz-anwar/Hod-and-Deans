@@ -12,14 +12,14 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.coetusstudio.hodanddeans.Activity.Administrator.CraeteBranchSectionActivity;
 import com.coetusstudio.hodanddeans.Activity.Faculty.AddfacultyActivity;
-import com.coetusstudio.hodanddeans.Activity.Faculty.SelectionType;
-import com.coetusstudio.hodanddeans.Activity.Student.StudentdetailsActivity;
+import com.coetusstudio.hodanddeans.Notification_Type_Activity;
+import com.coetusstudio.hodanddeans.SelectSectionStudent;
 import com.coetusstudio.hodanddeans.Activity.Attendance.AttendanceActivity;
 import com.coetusstudio.hodanddeans.Activity.Form.CreateformActivity;
 import com.coetusstudio.hodanddeans.Activity.Lecture.LivemeetingActivity;
 import com.coetusstudio.hodanddeans.R;
-import com.coetusstudio.hodanddeans.Activity.Notification.SentnotificationActivity;
 import com.coetusstudio.hodanddeans.SelectSectionActivity;
+import com.coetusstudio.hodanddeans.SendnotificationActivity;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     startActivity(new Intent(getApplicationContext(), UserActivity.class));
 
                 } else if (id == R.id.profileSendNotification) {
-                    Intent intent = new Intent(MainActivity.this, SentnotificationActivity.class);
+                    Intent intent = new Intent(MainActivity.this, SendnotificationActivity.class);
                     startActivity(intent);
 
                 } else if (id == R.id.privacyPolicy) {
@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.sendNotification:
-                Intent intent = new Intent(MainActivity.this, SentnotificationActivity.class);
+                Intent intent = new Intent(MainActivity.this, Notification_Type_Activity.class);
                 startActivity(intent);
                 break;
             case R.id.addNewFaculty:
@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent6);
                 break;
             case R.id.studentDetails:
-                Intent intent7 = new Intent(MainActivity.this, StudentdetailsActivity.class);
+                Intent intent7 = new Intent(MainActivity.this, SelectSectionStudent.class);
                 startActivity(intent7);
                 break;
         }

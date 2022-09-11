@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.coetusstudio.hodanddeans.Adapter.Notification.NoticeAdapter;
@@ -16,11 +17,15 @@ public class RecentnoticeActivity extends AppCompatActivity {
 
     RecyclerView recviewNotice;
     NoticeAdapter noticeAdapter;
+    String semester, section;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recentnotice);
+
+        Intent intent = getIntent();
+        section = intent.getStringExtra("section");
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(RecentnoticeActivity.this);
         recviewNotice=(RecyclerView)findViewById(R.id.rcNotice);
@@ -30,7 +35,7 @@ public class RecentnoticeActivity extends AppCompatActivity {
 
         FirebaseRecyclerOptions<NoticeData> options =
                 new FirebaseRecyclerOptions.Builder<NoticeData>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Notice").child("All Faculty And Students"), NoticeData.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Notice").child(section).child("All Faculty And Students"), NoticeData.class)
                         .build();
 
         noticeAdapter=new NoticeAdapter(options);

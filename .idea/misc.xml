@@ -29,15 +29,20 @@
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_livemeeting.xml" value="0.22" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_login.xml" value="0.3333333333333333" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_main.xml" value="0.17074275362318841" />
+        <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_notification_type.xml" value="0.184375" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_recent_faculty_notification.xml" value="0.184375" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_recentmeeting.xml" value="0.184375" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_recentnotice.xml" value="0.1703125" />
+        <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_select_notification.xml" value="0.22" />
+        <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_select_notification_type.xml" value="0.184375" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_select_secion.xml" value="0.184375" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_select_section.xml" value="0.184375" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_select_section_faculty.xml" value="0.184375" />
+        <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_select_section_student.xml" value="0.184375" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_select_subject_attendance.xml" value="0.1703125" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_sendnotification.xml" value="0.17074275362318841" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_sentnotification.xml" value="0.1721014492753623" />
+        <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_sentnotification2.xml" value="0.184375" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_signup.xml" value="0.22" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_studentdetails.xml" value="0.184375" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_updateanddeletefaculty.xml" value="0.184375" />

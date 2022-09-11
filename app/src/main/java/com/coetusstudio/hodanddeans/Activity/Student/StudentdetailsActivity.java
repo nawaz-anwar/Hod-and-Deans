@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +20,7 @@ public class StudentdetailsActivity extends AppCompatActivity {
 
     RecyclerView recviewStudent;
     StudentAdapter studentAdapter;
+    String section;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +29,15 @@ public class StudentdetailsActivity extends AppCompatActivity {
 
         setTitle("Enter Admission Number");
 
+        Intent intent = getIntent();
+        section = intent.getStringExtra("section");
+
         recviewStudent=(RecyclerView)findViewById(R.id.rcstudents);
         recviewStudent.setLayoutManager(new LinearLayoutManager(this));
 
         FirebaseRecyclerOptions<StudentDetails> options =
                 new FirebaseRecyclerOptions.Builder<StudentDetails>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("IIMTU").child("Student"), StudentDetails.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Student Data").child(section), StudentDetails.class)
                         .build();
 
         studentAdapter=new StudentAdapter(options);

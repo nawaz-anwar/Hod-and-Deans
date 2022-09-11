@@ -1,28 +1,23 @@
-package com.coetusstudio.hodanddeans.Activity.Notification;
+package com.coetusstudio.hodanddeans;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.coetusstudio.hodanddeans.Activity.Notification.RecentFacultyNotification;
+import com.coetusstudio.hodanddeans.Activity.Notification.RecentnoticeActivity;
 import com.coetusstudio.hodanddeans.Models.Notification.NoticeData;
-import com.coetusstudio.hodanddeans.R;
-import com.coetusstudio.hodanddeans.databinding.ActivitySentnotificationBinding;
+import com.coetusstudio.hodanddeans.databinding.ActivitySendnotificationBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,9 +43,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class SentnotificationActivity extends AppCompatActivity {
+public class SendnotificationActivity extends AppCompatActivity {
 
-    ActivitySentnotificationBinding binding;
+    ActivitySendnotificationBinding binding;
     Uri filepath;
     Boolean isImageUploaded = false;
     StorageReference storageReference;
@@ -58,15 +53,17 @@ public class SentnotificationActivity extends AppCompatActivity {
     private ProgressDialog pd;
     FirebaseAuth auth;
     FirebaseUser currentUser;
-    String facultyImage, notificationType;
-
+    String adminImage, notificationType, semester, section;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivitySentnotificationBinding.inflate(getLayoutInflater());
+        binding = ActivitySendnotificationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         pd = new ProgressDialog(this);
+
+        Intent intent = getIntent();
+        section = intent.getStringExtra("section");
 
         auth = FirebaseAuth.getInstance();
         currentUser = auth.getCurrentUser();
@@ -96,11 +93,18 @@ public class SentnotificationActivity extends AppCompatActivity {
             }
         });
 
-        FirebaseDatabase.getInstance().getReference().child("IIMTU").child("Faculty").child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("IIMTU").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                    facultyImage = snapshot.child("facultyImage").getValue().toString();
+                for (DataSnapshot dsp : snapshot.getChildren()) {
+                    try {
+                        adminImage = dsp.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("userImage").getValue(String.class).toString();
+
+                    }
+                    catch (Exception e){
+                        e.printStackTrace();
+                    }
+
                 }
             }
 
@@ -113,14 +117,18 @@ public class SentnotificationActivity extends AppCompatActivity {
         binding.btnRecentStudentNotification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), RecentnoticeActivity.class));
+                Intent intent = new Intent(SendnotificationActivity.this, RecentnoticeActivity.class);
+                intent.putExtra("section", section);
+                startActivity(intent);
             }
         });
 
         binding.btnRecentFacultyNotification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), RecentFacultyNotification.class));
+                Intent intent = new Intent(SendnotificationActivity.this, RecentFacultyNotification.class);
+                intent.putExtra("section", section);
+                startActivity(intent);
             }
         });
 
@@ -176,11 +184,10 @@ public class SentnotificationActivity extends AppCompatActivity {
 
     private void uploadNotice(String date, String time) {
         if (binding.noticeTitle.getEditableText().toString().isEmpty()){
-            Toast.makeText(getApplicationContext(),"Please! Enter Notice Description",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Please! Enter Notice Description", Toast.LENGTH_SHORT).show();
         }else {
-            Log.i("Notification", "Without image");
-            NoticeData noticeData = new NoticeData(binding.noticeTitle.getEditableText().toString(), date, time, facultyImage);
-            databaseReference.child("Notice").child(notificationType).child(databaseReference.push().getKey()).setValue(noticeData).addOnSuccessListener(new OnSuccessListener<Void>() {
+            NoticeData noticeData = new NoticeData(binding.noticeTitle.getEditableText().toString(), date, time, adminImage);
+            databaseReference.child("Notice").child(section).child(notificationType).child(databaseReference.push().getKey()).setValue(noticeData).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
                     Toast.makeText(getApplicationContext(), "Notice Uploaded", Toast.LENGTH_SHORT).show();
@@ -231,8 +238,8 @@ public class SentnotificationActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Uri uri) {
 
-                                    NoticeData noticeData = new NoticeData(binding.noticeTitle.getEditableText().toString(), uri.toString(), date, time, facultyImage);
-                                    databaseReference.child("Notice").child(notificationType).child(databaseReference.push().getKey()).setValue(noticeData);
+                                    NoticeData noticeData = new NoticeData(binding.noticeTitle.getEditableText().toString(), uri.toString(), date, time, adminImage);
+                                    databaseReference.child("Notice").child(section).child(notificationType).child(databaseReference.push().getKey()).setValue(noticeData);
 
                                     pd.dismiss();
                                     Toast.makeText(getApplicationContext(), "Notice Uploaded", Toast.LENGTH_LONG).show();
