@@ -1,5 +1,6 @@
 package com.coetusstudio.hodanddeans.Activity.Faculty;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,15 +12,23 @@ import android.view.MenuItem;
 import android.widget.SearchView;
 
 import com.coetusstudio.hodanddeans.Adapter.Faculty.FacultyAdapter;
+import com.coetusstudio.hodanddeans.Adapter.Student.StudentAdapter;
 import com.coetusstudio.hodanddeans.Models.Faculty.AddFaculty;
+import com.coetusstudio.hodanddeans.Models.Students.StudentDetails;
 import com.coetusstudio.hodanddeans.R;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class UpdateanddeletefacultyActivity extends AppCompatActivity {
 
     RecyclerView recviewFaculty;
     FacultyAdapter facultyAdapter;
+    ArrayList<AddFaculty> list;
     String section;
 
     @Override
@@ -32,13 +41,13 @@ public class UpdateanddeletefacultyActivity extends AppCompatActivity {
         section = intent.getStringExtra("section");
 
         recviewFaculty=(RecyclerView)findViewById(R.id.rcFactulty);
+        recviewFaculty.setHasFixedSize(true);
         recviewFaculty.setLayoutManager(new LinearLayoutManager(this));
 
         FirebaseRecyclerOptions<AddFaculty> options =
                 new FirebaseRecyclerOptions.Builder<AddFaculty>()
                         .setQuery(FirebaseDatabase.getInstance().getReference().child("Faculty Data").child(section), AddFaculty.class)
                         .build();
-
         facultyAdapter=new FacultyAdapter(options);
         recviewFaculty.setAdapter(facultyAdapter);
     }
@@ -53,8 +62,9 @@ public class UpdateanddeletefacultyActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         facultyAdapter.stopListening();
+    }
 
-     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -95,7 +105,5 @@ public class UpdateanddeletefacultyActivity extends AppCompatActivity {
         recviewFaculty.setAdapter(facultyAdapter);
 
     }
-
-
     
 }

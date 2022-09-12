@@ -68,16 +68,17 @@
                 android:layout_gravity="center_horizontal"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
+        <TextView
             android:id="@+id/btnlogin"
-            android:layout_width="230dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/round_button"
-            android:padding="10dp"
+            android:layout_width="222dp"
+            android:layout_height="55dp"
+            android:textSize="20sp"
             android:text="Login"
-            android:textColor="#000"
-            android:textSize="20sp" />
+            android:textColor="#fff"
+            android:gravity="center"
+            android:padding="10dp"
+            android:background="@drawable/buttonbg"
+            android:layout_gravity="center_horizontal"/>
 
 
         <TextView
@@ -85,19 +86,21 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_marginTop="10dp"
+            android:textSize="12sp"
             android:text="Don't have an account Register Now" />
 
-
-        <androidx.appcompat.widget.AppCompatButton
+        <TextView
             android:id="@+id/btnRegisterNow"
-            android:layout_width="230dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/round_button"
-            android:padding="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="222dp"
+            android:layout_height="55dp"
+            android:textSize="20sp"
             android:text="Register Now"
-            android:textColor="#000"
-            android:textSize="20sp" />
+            android:layout_marginTop="10dp"
+            android:textColor="#fff"
+            android:gravity="center"
+            android:padding="10dp"
+            android:background="@drawable/buttonbg"
+            android:layout_gravity="center_horizontal"/>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

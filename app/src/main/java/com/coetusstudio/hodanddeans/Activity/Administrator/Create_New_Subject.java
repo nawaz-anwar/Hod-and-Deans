@@ -2,13 +2,21 @@ package com.coetusstudio.hodanddeans.Activity.Administrator;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.coetusstudio.hodanddeans.Adapter.Adminstrator.SectionAdapter;
+import com.coetusstudio.hodanddeans.Adapter.Adminstrator.SubjectAdapter;
+import com.coetusstudio.hodanddeans.Models.Administrator.Section;
+import com.coetusstudio.hodanddeans.Models.Administrator.Subject;
+import com.coetusstudio.hodanddeans.R;
 import com.coetusstudio.hodanddeans.databinding.ActivityCreateNewSubjectBinding;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
@@ -21,6 +29,8 @@ public class Create_New_Subject extends AppCompatActivity {
     ActivityCreateNewSubjectBinding binding;
     private DatabaseReference dbsubject;
     ProgressDialog mDialog;
+    RecyclerView recviewSubject;
+    SubjectAdapter subjectAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +51,17 @@ public class Create_New_Subject extends AppCompatActivity {
                 }
             }
         });
+
+        recviewSubject=(RecyclerView)findViewById(R.id.rcsubject);
+        recviewSubject.setLayoutManager(new LinearLayoutManager(this));
+
+        FirebaseRecyclerOptions<Subject> options =
+                new FirebaseRecyclerOptions.Builder<Subject>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Subject"), Subject.class)
+                        .build();
+
+        subjectAdapter=new SubjectAdapter(options);
+        recviewSubject.setAdapter(subjectAdapter);
     }
     private void sendlink() {
 
@@ -66,5 +87,18 @@ public class Create_New_Subject extends AppCompatActivity {
                 Toast.makeText(Create_New_Subject.this, "Please, try again later!", Toast.LENGTH_SHORT).show();
             }
         });
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        subjectAdapter.startListening();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        subjectAdapter.stopListening();
     }
 }

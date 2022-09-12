@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,11 +20,15 @@ public class RecentmeetingActivity extends AppCompatActivity {
 
     RecyclerView recviewLecture;
     MeetingAdapter lectureAdapter;
+    String section;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recentmeeting);
+
+        Intent intent = getIntent();
+        section = intent.getStringExtra("section");
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(RecentmeetingActivity.this);
         recviewLecture=(RecyclerView)findViewById(R.id.rcLecture);
@@ -33,7 +38,7 @@ public class RecentmeetingActivity extends AppCompatActivity {
 
         FirebaseRecyclerOptions<Lecture> options =
                 new FirebaseRecyclerOptions.Builder<Lecture>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Lecture"), Lecture.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Lecture").child(section), Lecture.class)
                         .build();
 
         lectureAdapter=new MeetingAdapter(options);

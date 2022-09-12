@@ -12,14 +12,15 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.coetusstudio.hodanddeans.Activity.Administrator.CraeteBranchSectionActivity;
 import com.coetusstudio.hodanddeans.Activity.Faculty.AddfacultyActivity;
+import com.coetusstudio.hodanddeans.SelectLectureType;
 import com.coetusstudio.hodanddeans.Notification_Type_Activity;
 import com.coetusstudio.hodanddeans.SelectSectionStudent;
 import com.coetusstudio.hodanddeans.Activity.Attendance.AttendanceActivity;
 import com.coetusstudio.hodanddeans.Activity.Form.CreateformActivity;
-import com.coetusstudio.hodanddeans.Activity.Lecture.LivemeetingActivity;
 import com.coetusstudio.hodanddeans.R;
 import com.coetusstudio.hodanddeans.SelectSectionActivity;
 import com.coetusstudio.hodanddeans.SendnotificationActivity;
+import com.coetusstudio.hodanddeans.databinding.ActivityMainBinding;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
@@ -30,7 +31,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.coetusstudio.hodanddeans.databinding.ActivityMainBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent2);
                 break;
             case R.id.liveMeeting:
-                Intent intent3 = new Intent(MainActivity.this, LivemeetingActivity.class);
+                Intent intent3 = new Intent(MainActivity.this, SelectLectureType.class);
                 startActivity(intent3);
                 break;
             case R.id.updateDeleteFaculty:

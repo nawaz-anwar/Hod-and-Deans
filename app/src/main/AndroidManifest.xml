@@ -14,6 +14,9 @@
         android:theme="@style/Theme.HodAndDeans"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".SelectLectureType"
+            android:exported="false" />
+        <activity
             android:name=".Notification_Type_Activity"
             android:exported="false" />
         <activity

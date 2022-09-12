@@ -32,7 +32,7 @@ import java.util.Map;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class StudentAdapter extends FirebaseRecyclerAdapter<StudentDetails,StudentAdapter.myviewholder>{
-
+String studentSection;
 
     public StudentAdapter(@NonNull FirebaseRecyclerOptions<StudentDetails> options)
     {
@@ -58,6 +58,7 @@ public class StudentAdapter extends FirebaseRecyclerAdapter<StudentDetails,Stude
                 .circleCrop()
                 .error(R.drawable.manimg)
                 .into(holder.img);
+        studentSection = StudentDetails.getStudentSection();
 
         holder.edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,7 +108,7 @@ public class StudentAdapter extends FirebaseRecyclerAdapter<StudentDetails,Stude
                         map.put("studentGrade",grade.getText().toString());
 
 
-                        FirebaseDatabase.getInstance().getReference().child("IIMTU").child("Student").child(getRef(position).getKey())
+                        FirebaseDatabase.getInstance().getReference().child("Student Data").child(studentSection).child(getRef(position).getKey())
                                 .updateChildren(map)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
@@ -140,7 +141,7 @@ public class StudentAdapter extends FirebaseRecyclerAdapter<StudentDetails,Stude
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        FirebaseDatabase.getInstance().getReference().child("IIMTU").child("Student").child(getRef(position).getKey())
+                        FirebaseDatabase.getInstance().getReference().child("Student Data").child(studentSection).child(getRef(position).getKey())
                                 .removeValue();
                     }
                 });

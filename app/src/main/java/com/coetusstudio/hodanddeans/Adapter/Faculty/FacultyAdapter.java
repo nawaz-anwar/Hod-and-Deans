@@ -33,6 +33,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class FacultyAdapter extends FirebaseRecyclerAdapter<AddFaculty,FacultyAdapter.myviewholder>{
 
+    String facultySection;
+
     public FacultyAdapter(@NonNull FirebaseRecyclerOptions<AddFaculty> options)
     {
         super(options);
@@ -56,7 +58,7 @@ public class FacultyAdapter extends FirebaseRecyclerAdapter<AddFaculty,FacultyAd
                 .circleCrop()
                 .error(R.drawable.manimg)
                 .into(holder.img);
-
+        facultySection = AddFaculty.getFacultySection();
 
         holder.edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,7 +103,7 @@ public class FacultyAdapter extends FirebaseRecyclerAdapter<AddFaculty,FacultyAd
                         map.put("facultySemester",semester.getText().toString());
                         map.put("facultySection",section.getText().toString());
 
-                        FirebaseDatabase.getInstance().getReference().child("IIMTU").child("Faculty").child(getRef(position).getKey())
+                        FirebaseDatabase.getInstance().getReference().child("Faculty Data").child(facultySection).child(getRef(position).getKey())
                                 .updateChildren(map)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
@@ -134,7 +136,7 @@ public class FacultyAdapter extends FirebaseRecyclerAdapter<AddFaculty,FacultyAd
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        FirebaseDatabase.getInstance().getReference().child("IIMTU").child("Faculty").child(getRef(position).getKey())
+                        FirebaseDatabase.getInstance().getReference().child("Faculty Data").child(facultySection).child(getRef(position).getKey())
                                 .removeValue();
                     }
                 });

@@ -25,12 +25,16 @@ public class LivemeetingActivity extends AppCompatActivity {
     ActivityLivemeetingBinding binding;
     DatabaseReference reference;
     ProgressDialog progressDialog;
+    String section;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityLivemeetingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        Intent intent = getIntent();
+        section = intent.getStringExtra("section");
 
         progressDialog = new ProgressDialog(LivemeetingActivity.this);
         progressDialog.setTitle("Creating Meeting");
@@ -42,6 +46,7 @@ public class LivemeetingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LivemeetingActivity.this, RecentmeetingActivity.class);
+                intent.putExtra("section", section);
                 startActivity(intent);
             }
         });
@@ -111,7 +116,7 @@ public class LivemeetingActivity extends AppCompatActivity {
         Lecture lecture = new Lecture(lectureName,lectureLink,lectureTiming,date,time);
 
 
-        reference.push().setValue(lecture).addOnSuccessListener(new OnSuccessListener<Void>() {
+        reference.child(section).push().setValue(lecture).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 binding.lectureName.getEditText().setText("");
