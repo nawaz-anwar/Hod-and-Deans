@@ -93,6 +93,21 @@
         app:layout_constraintVertical_bias="0.596" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnCredentials"
+        android:layout_width="287dp"
+        android:layout_height="55dp"
+        android:background="@drawable/round_button"
+        android:padding="10dp"
+        android:text="Create Password"
+        android:textColor="#000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.853" />
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnCreateSessional"
         android:layout_width="287dp"
         android:layout_height="55dp"

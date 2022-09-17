@@ -20,6 +20,7 @@ import com.coetusstudio.hodanddeans.Activity.Form.CreateformActivity;
 import com.coetusstudio.hodanddeans.R;
 import com.coetusstudio.hodanddeans.SelectSectionActivity;
 import com.coetusstudio.hodanddeans.SendnotificationActivity;
+import com.coetusstudio.hodanddeans.VerificationActivity;
 import com.coetusstudio.hodanddeans.databinding.ActivityMainBinding;
 import com.google.android.material.navigation.NavigationView;
 
@@ -164,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent4);
                 break;
             case R.id.administrator:
-                Intent intent5 = new Intent(MainActivity.this, CraeteBranchSectionActivity.class);
+                Intent intent5 = new Intent(MainActivity.this, VerificationActivity.class);
                 startActivity(intent5);
                 break;
             case R.id.createForm:
@@ -196,6 +197,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     String url = snapshot.child("userImage").getValue().toString();
                     Glide.with(getApplicationContext()).load(url).into(navUserPhot);
 
+                }else {
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                    Toast.makeText(getApplicationContext(),"Invalid User", Toast.LENGTH_LONG).show();
+                    finish();
                 }
             }
 

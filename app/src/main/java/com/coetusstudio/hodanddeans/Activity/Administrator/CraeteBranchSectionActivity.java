@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.coetusstudio.hodanddeans.Activity.Home.MainActivity;
+import com.coetusstudio.hodanddeans.CredentialPassword;
 import com.coetusstudio.hodanddeans.databinding.ActivityCraeteBranchSectionBinding;
 
 public class CraeteBranchSectionActivity extends AppCompatActivity {
@@ -58,5 +60,19 @@ public class CraeteBranchSectionActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        binding.btnCredentials.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CraeteBranchSectionActivity.this, CredentialPassword.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
     }
 }
