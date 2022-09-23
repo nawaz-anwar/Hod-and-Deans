@@ -125,6 +125,7 @@ public class SelectSectionActivity extends AppCompatActivity {
                     intent.putExtra("semester", semester);
                     intent.putExtra("section", section);
                     startActivity(intent);
+                    finish();
                 }
             });
 

@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.coetusstudio.hodanddeans.Activity.Administrator.CraeteBranchSectionActivity;
 import com.coetusstudio.hodanddeans.Activity.Faculty.AddfacultyActivity;
+import com.coetusstudio.hodanddeans.FacultyActivity;
 import com.coetusstudio.hodanddeans.SelectLectureType;
 import com.coetusstudio.hodanddeans.Notification_Type_Activity;
 import com.coetusstudio.hodanddeans.SelectSectionStudent;
@@ -22,6 +23,7 @@ import com.coetusstudio.hodanddeans.SelectSectionActivity;
 import com.coetusstudio.hodanddeans.SendnotificationActivity;
 import com.coetusstudio.hodanddeans.VerificationActivity;
 import com.coetusstudio.hodanddeans.databinding.ActivityMainBinding;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
@@ -47,14 +49,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     CardView sendNotification, addNewFaculty, updateDeleteFaculty, studentDetails, liveMeeting, administrator, createForm, chat, attendance;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
+    FloatingActionButton emailFeedback;
     Toolbar toolbar;
-    ActivityMainBinding binding;
     FirebaseAuth auth;
     FirebaseUser currentUser;
-    DatabaseReference database;
-    String facultyImage, facultyName, facultyEmail, facultyId;
-    CircleImageView headerImage;
-    TextView headerName, headerEmail, headerID;
+    String userImage;
 
 
     @Override
@@ -90,12 +89,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbar);
+        emailFeedback = findViewById(R.id.emailFeedback);
 
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.OpenDrawer, R.string.CloseDrawer);
         toggle.syncState();
 
-        toolbar.setTitle("IIMT HoDs And Deans");
+        toolbar.setTitle("IIMTU HoDs And Deans");
 
         updateNavHeader();
 
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     startActivity(new Intent(getApplicationContext(), UserActivity.class));
 
                 } else if (id == R.id.profileSendNotification) {
-                    Intent intent = new Intent(MainActivity.this, SendnotificationActivity.class);
+                    Intent intent = new Intent(MainActivity.this, FacultyActivity.class);
                     startActivity(intent);
 
                 } else if (id == R.id.privacyPolicy) {
@@ -139,6 +139,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        emailFeedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                emailIntent.setType("text/plain");
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[] {"feedback.coetusstudio@gmail.com"});
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "IIMTU HoDs And Deans Feedback");
+                emailIntent.putExtra(Intent.EXTRA_TEXT, "Type your query here...");
+                emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("content://path/to/email/attachment"));
+                startActivity(emailIntent);
+            }
+        });
+
 
     }
     @Override
@@ -158,6 +171,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.liveMeeting:
                 Intent intent3 = new Intent(MainActivity.this, SelectLectureType.class);
+                intent3.putExtra("image", userImage);
                 startActivity(intent3);
                 break;
             case R.id.updateDeleteFaculty:
@@ -194,8 +208,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     navUsername.setText(snapshot.child("userName").getValue().toString());
                     navUserMail.setText(snapshot.child("userEmail").getValue().toString());
-                    String url = snapshot.child("userImage").getValue().toString();
-                    Glide.with(getApplicationContext()).load(url).into(navUserPhot);
+                    userImage = snapshot.child("userImage").getValue().toString();
+                    Glide.with(getApplicationContext()).load(userImage).into(navUserPhot);
 
                 }else {
                     startActivity(new Intent(getApplicationContext(), LoginActivity.class));

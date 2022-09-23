@@ -261,4 +261,9 @@ public class SendnotificationActivity extends AppCompatActivity {
                     });
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

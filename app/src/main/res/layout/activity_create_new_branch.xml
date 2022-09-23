@@ -56,11 +56,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="18dp"
-            android:background="@drawable/round_button"
+            android:background="@drawable/buttonbg"
             android:padding="10dp"
             android:text="Add New Branch"
-            android:textColor="#000"
-            android:textSize="20sp" />
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textAllCaps="false"/>
 
 
     </LinearLayout>

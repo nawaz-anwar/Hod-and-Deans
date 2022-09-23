@@ -24,9 +24,9 @@
                 android:layout_height="44dp"
                 android:fontFamily="sans-serif-medium"
                 android:text="Add New Faculty"
-                android:textSize="28sp"
+                android:textSize="30sp"
                 android:textColor="#000000"
-                android:textStyle="bold"
+                android:textStyle="normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.496"
@@ -171,14 +171,15 @@
                 android:layout_width="178dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/round_button"
+                android:background="@drawable/buttonbg"
                 android:padding="10dp"
                 android:text="Add Faculty"
                 android:id="@+id/btnAddFaculty"
-                android:textColor="#000"
+                android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 tools:layout_editor_absoluteX="127dp"
-                tools:layout_editor_absoluteY="616dp" />
+                tools:layout_editor_absoluteY="616dp"
+                android:textAllCaps="false"/>
 
         </LinearLayout>
 

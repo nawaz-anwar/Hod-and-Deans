@@ -80,34 +80,35 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnViewCollectiveAttendance"
-        android:layout_width="287dp"
+        android:layout_width="230dp"
         android:layout_height="55dp"
-        android:background="@drawable/round_button"
+        android:background="@drawable/buttonbg"
         android:padding="10dp"
         android:text="View Attendance"
-        android:textColor="#000"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.52" />
+        app:layout_constraintVertical_bias="0.52"
+        android:textAllCaps="false"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnDeleteAttendance"
-        android:layout_width="287dp"
+        android:layout_width="230dp"
         android:layout_height="55dp"
-        android:background="@drawable/round_button"
+        android:background="@drawable/buttonbg"
         android:padding="10dp"
         android:text="Delete Attendance"
-        android:textColor="#000"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.548"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.655" />
+        app:layout_constraintVertical_bias="0.655"
+        android:textAllCaps="false"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

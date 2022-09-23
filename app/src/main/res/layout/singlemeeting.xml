@@ -3,8 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="5dp"
+    app:cardCornerRadius="16dp"
     android:elevation="5dp"
+    android:layout_marginBottom="7dp"
     app:cardUseCompatPadding="true">
 
     <LinearLayout
@@ -16,7 +17,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <TextView
@@ -61,6 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="3dp"
             android:text="Lecture Timing"
             android:textColor="#000"
             android:textSize="18sp" />
@@ -70,7 +72,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="2dp"
             android:orientation="horizontal">
 
 
@@ -91,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="TextView"
-                android:textColor="#000000"
+                android:textColor="#2340E1"
                 android:textStyle="bold"
                 android:textSize="14sp" />
 
@@ -101,12 +104,11 @@
             android:id="@+id/btnLectureJoin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/btnBgColor"
+            android:background="@drawable/round_button"
             android:text="Join" />
 
 
     </LinearLayout>
-
 
 
 

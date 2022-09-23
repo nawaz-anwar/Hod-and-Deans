@@ -2,14 +2,16 @@ package com.coetusstudio.hodanddeans.Models.Lecture;
 
 public class Lecture {
 
-    String lectureName, lectureLink,lectureTiming, lectureDate, lectureTime;
+    String lectureName, lectureTiming, lectureLink, lectureDate, lectureTime, facultyImage, facultySection;
 
-    public Lecture(String lectureName, String lectureLink, String lectureTiming, String lectureDate, String lectureTime) {
+    public Lecture(String lectureName, String lectureTiming, String lectureLink, String lectureDate, String lectureTime, String facultyImage, String facultySection) {
         this.lectureName = lectureName;
-        this.lectureLink = lectureLink;
         this.lectureTiming = lectureTiming;
+        this.lectureLink = lectureLink;
         this.lectureDate = lectureDate;
         this.lectureTime = lectureTime;
+        this.facultyImage = facultyImage;
+        this.facultySection = facultySection;
     }
 
     public Lecture() {
@@ -23,20 +25,20 @@ public class Lecture {
         this.lectureName = lectureName;
     }
 
-    public String getLectureLink() {
-        return lectureLink;
-    }
-
-    public void setLectureLink(String lectureLink) {
-        this.lectureLink = lectureLink;
-    }
-
     public String getLectureTiming() {
         return lectureTiming;
     }
 
     public void setLectureTiming(String lectureTiming) {
         this.lectureTiming = lectureTiming;
+    }
+
+    public String getLectureLink() {
+        return lectureLink;
+    }
+
+    public void setLectureLink(String lectureLink) {
+        this.lectureLink = lectureLink;
     }
 
     public String getLectureDate() {
@@ -53,5 +55,21 @@ public class Lecture {
 
     public void setLectureTime(String lectureTime) {
         this.lectureTime = lectureTime;
+    }
+
+    public String getFacultyImage() {
+        return facultyImage;
+    }
+
+    public void setFacultyImage(String facultyImage) {
+        this.facultyImage = facultyImage;
+    }
+
+    public String getFacultySection() {
+        return facultySection;
+    }
+
+    public void setFacultySection(String facultySection) {
+        this.facultySection = facultySection;
     }
 }

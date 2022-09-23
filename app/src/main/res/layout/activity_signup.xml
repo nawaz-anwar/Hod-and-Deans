@@ -152,15 +152,16 @@
                 android:layout_width="178dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/round_button"
+                android:background="@drawable/buttonbg"
                 android:padding="10dp"
                 android:layout_marginTop="15dp"
                 android:text="Register Now"
                 android:id="@+id/btnUserRegister"
-                android:textColor="#000"
+                android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 tools:layout_editor_absoluteX="127dp"
-                tools:layout_editor_absoluteY="616dp" />
+                tools:layout_editor_absoluteY="616dp"
+                android:textAllCaps="false"/>
 
         </LinearLayout>
 

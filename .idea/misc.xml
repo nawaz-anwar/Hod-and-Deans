@@ -12,8 +12,10 @@
         <entry key="..\:/App data/HodandDeans/app/src/main/res/drawable/round_button.xml" value="0.1787037037037037" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/drawable/spinnerbg.xml" value="0.20052083333333334" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/drawable/view_round.xml" value="0.20052083333333334" />
+        <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_add_faculty_basic.xml" value="0.1703125" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_addaccountfaculty.xml" value="0.22" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_addfaculty.xml" value="0.22" />
+        <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_assign_section_faculty.xml" value="0.1703125" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_attendance.xml" value="0.184375" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_chat.xml" value="0.3333333333333333" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_craete_branch_section.xml" value="0.22" />
@@ -27,6 +29,7 @@
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_credential_password.xml" value="0.184375" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_delete_attendance.xml" value="0.1703125" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_download_attendance.xml" value="0.184375" />
+        <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_faculty.xml" value="0.184375" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_faculty_section.xml" value="0.184375" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_forget_password.xml" value="0.16666666666666666" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_livemeeting.xml" value="0.22" />
@@ -58,7 +61,7 @@
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_view_collective_attendance.xml" value="0.184375" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_view_subject_attendance.xml" value="0.184375" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/app_bar_main.xml" value="0.16666666666666666" />
-        <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/content_main.xml" value="0.17074275362318841" />
+        <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/content_main.xml" value="0.3333333333333333" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/dialogaccount.xml" value="0.184375" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/dialogfaculty.xml" value="0.22" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/dialogstudent.xml" value="0.184375" />

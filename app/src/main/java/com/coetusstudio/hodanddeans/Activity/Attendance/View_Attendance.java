@@ -28,6 +28,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class View_Attendance extends AppCompatActivity {
 
@@ -68,9 +70,7 @@ public class View_Attendance extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
 
-
         //ending of recycler view
-
 
         mDialog = new ProgressDialog(this);
         mDialog.setTitle("Please Wait");

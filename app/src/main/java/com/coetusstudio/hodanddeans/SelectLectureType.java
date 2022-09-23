@@ -27,7 +27,7 @@ import java.util.List;
 public class SelectLectureType extends AppCompatActivity {
 
     ActivitySelectLectureTypeBinding binding;
-    String semester, section;
+    String semester, section, userImage;
     DatabaseReference dbSemesterRef, dbSectionRef;
 
     @Override
@@ -35,6 +35,9 @@ public class SelectLectureType extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivitySelectLectureTypeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        Intent intent = getIntent();
+        userImage = intent.getStringExtra("image");
 
         dbSemesterRef = FirebaseDatabase.getInstance().getReference().child("Semester");
         dbSectionRef = FirebaseDatabase.getInstance().getReference().child("Section");
@@ -125,7 +128,9 @@ public class SelectLectureType extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), LivemeetingActivity.class);
                 intent.putExtra("semester", semester);
                 intent.putExtra("section", section);
+                intent.putExtra("image", userImage);
                 startActivity(intent);
+                finish();
             }
         });
 

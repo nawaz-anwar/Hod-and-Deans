@@ -86,11 +86,12 @@
             android:layout_width="210dp"
             android:layout_height="46dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/round_button"
+            android:background="@drawable/buttonbg"
             android:text="Send Notice"
-            android:textColor="#000"
+            android:textColor="#FFFFFF"
             android:layout_gravity="center"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textAllCaps="false"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -104,20 +105,22 @@
                 android:id="@+id/btnRecentStudentNotification"
                 android:layout_width="188dp"
                 android:layout_height="46dp"
-                android:background="@drawable/round_button"
+                android:background="@drawable/buttonbg"
                 android:text="Students"
-                android:textColor="#000"
-                android:textSize="20sp" />
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textAllCaps="false"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnRecentFacultyNotification"
                 android:layout_width="188dp"
                 android:layout_height="46dp"
-                android:background="@drawable/round_button"
+                android:background="@drawable/buttonbg"
                 android:text="Faculty"
-                android:textColor="#000"
+                android:textColor="#FFFFFF"
                 android:layout_marginLeft="5dp"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textAllCaps="false"/>
 
         </LinearLayout>
 

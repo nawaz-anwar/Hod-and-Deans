@@ -14,6 +14,15 @@
         android:theme="@style/Theme.HodAndDeans"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".AssignSectionFaculty"
+            android:exported="false" />
+        <activity
+            android:name=".AddFacultyBasic"
+            android:exported="false" />
+        <activity
+            android:name=".FacultyActivity"
+            android:exported="false" />
+        <activity
             android:name=".CredentialPassword"
             android:exported="false" />
         <activity
@@ -29,25 +38,10 @@
             android:name=".SendnotificationActivity"
             android:exported="false" />
         <activity
-            android:name=".SentnotificationActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SelectNotificationType"
-            android:exported="false" />
-        <activity
             android:name=".SelectSectionStudent"
             android:exported="false" />
         <activity
-            android:name=".SelectionType"
-            android:exported="false" />
-        <activity
             android:name=".SelectSectionActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SelectSecionActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SelectSectionFaculty"
             android:exported="false" />
         <activity
             android:name=".Activity.Attendance.View_Attendance"

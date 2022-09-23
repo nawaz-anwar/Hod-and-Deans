@@ -3,6 +3,7 @@ package com.coetusstudio.hodanddeans.Adapter.Lecture;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class MeetingAdapter extends FirebaseRecyclerAdapter<Lecture,MeetingAdapter.myviewholder> {
-
+    String section;
     public MeetingAdapter(@NonNull FirebaseRecyclerOptions<Lecture> options)
     {
         super(options);
@@ -36,6 +37,8 @@ public class MeetingAdapter extends FirebaseRecyclerAdapter<Lecture,MeetingAdapt
         holder.lectureLink.setText(Lecture.getLectureLink());
         holder.lectureDate.setText(Lecture.getLectureDate());
         holder.lectureTime.setText(Lecture.getLectureTime());
+        String uriLink = Lecture.getLectureLink();
+        section = Lecture.getFacultySection();
 
         holder.lectureDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,7 +51,7 @@ public class MeetingAdapter extends FirebaseRecyclerAdapter<Lecture,MeetingAdapt
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        FirebaseDatabase.getInstance().getReference().child("Lecture").child(getRef(position).getKey())
+                        FirebaseDatabase.getInstance().getReference().child("Lecture").child(section).child(getRef(position).getKey())
                                 .removeValue();
                     }
                 });
@@ -61,6 +64,26 @@ public class MeetingAdapter extends FirebaseRecyclerAdapter<Lecture,MeetingAdapt
                 });
 
                 builder.show();
+            }
+        });
+
+        holder.btnLectureJoin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_TEXT, uriLink);
+                intent.setType("text/plain");
+                holder.lectureLink.getContext().startActivity(intent);
+            }
+        });
+
+        holder.lectureLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_TEXT, uriLink);
+                intent.setType("text/plain");
+                holder.lectureLink.getContext().startActivity(intent);
             }
         });
 

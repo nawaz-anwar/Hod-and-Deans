@@ -25,7 +25,7 @@ public class LivemeetingActivity extends AppCompatActivity {
     ActivityLivemeetingBinding binding;
     DatabaseReference reference;
     ProgressDialog progressDialog;
-    String section;
+    String section, userImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,7 @@ public class LivemeetingActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         section = intent.getStringExtra("section");
+        userImage = intent.getStringExtra("image");
 
         progressDialog = new ProgressDialog(LivemeetingActivity.this);
         progressDialog.setTitle("Creating Meeting");
@@ -113,7 +114,7 @@ public class LivemeetingActivity extends AppCompatActivity {
         String lectureName = binding.lectureName.getEditText().getText().toString();
         String lectureLink = binding.lectureLink.getEditText().getText().toString();
         String lectureTiming = binding.lectureTiming.getEditText().getText().toString();
-        Lecture lecture = new Lecture(lectureName,lectureLink,lectureTiming,date,time);
+        Lecture lecture = new Lecture(lectureName,lectureTiming,lectureLink,date,time, userImage, section);
 
 
         reference.child(section).push().setValue(lecture).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -130,5 +131,10 @@ public class LivemeetingActivity extends AppCompatActivity {
                 Toast.makeText(LivemeetingActivity.this, "Please, try again later!", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

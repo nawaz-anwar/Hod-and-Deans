@@ -105,5 +105,9 @@ public class UpdateanddeletefacultyActivity extends AppCompatActivity {
         recviewFaculty.setAdapter(facultyAdapter);
 
     }
-    
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

@@ -124,6 +124,7 @@ public class Notification_Type_Activity extends AppCompatActivity {
                 intent.putExtra("semester", semester);
                 intent.putExtra("section", section);
                 startActivity(intent);
+                finish();
             }
         });
     }

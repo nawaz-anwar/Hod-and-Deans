@@ -21,6 +21,7 @@
             android:layout_width="130dp"
             android:layout_height="150dp"
             android:layout_margin="10dp"
+            app:cardCornerRadius="15dp"
             android:id="@+id/addNewFaculty"
             app:cardElevation="5dp">
 
@@ -45,6 +46,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Add Faculty"
+                    android:textColor="@color/card_view_text"
                     android:gravity="center"
                     android:textStyle="bold"/>
             </LinearLayout>
@@ -59,6 +61,7 @@
             android:layout_width="130dp"
             android:layout_height="150dp"
             android:layout_margin="10dp"
+            app:cardCornerRadius="15dp"
             android:id="@+id/updateDeleteFaculty"
             app:cardElevation="5dp">
 
@@ -83,6 +86,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Update And Delete Faculty"
+                    android:textColor="@color/card_view_text"
                     android:gravity="center"
                     android:textStyle="bold"/>
             </LinearLayout>
@@ -102,12 +106,14 @@
             android:layout_width="130dp"
             android:layout_height="150dp"
             android:layout_margin="10dp"
+            app:cardCornerRadius="15dp"
             android:id="@+id/studentDetails"
             app:cardElevation="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:cardCornerRadius="15dp"
                 android:orientation="vertical"
                 android:gravity="center">
 
@@ -126,6 +132,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Student Details"
+                    android:textColor="@color/card_view_text"
                     android:gravity="center"
                     android:textStyle="bold"/>
             </LinearLayout>
@@ -140,6 +147,7 @@
             android:layout_width="130dp"
             android:layout_height="150dp"
             android:layout_margin="10dp"
+            app:cardCornerRadius="15dp"
             android:id="@+id/sendNotification"
             app:cardElevation="5dp">
 
@@ -164,6 +172,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Send Noticification"
+                    android:textColor="@color/card_view_text"
                     android:gravity="center"
                     android:textStyle="bold"/>
             </LinearLayout>
@@ -183,6 +192,7 @@
             android:layout_width="130dp"
             android:layout_height="150dp"
             android:layout_margin="10dp"
+            app:cardCornerRadius="15dp"
             android:id="@+id/attendance"
             app:cardElevation="5dp">
 
@@ -207,6 +217,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Attendance"
+                    android:textColor="@color/card_view_text"
                     android:gravity="center"
                     android:textStyle="bold"/>
             </LinearLayout>
@@ -221,6 +232,7 @@
             android:layout_width="130dp"
             android:layout_height="150dp"
             android:layout_margin="10dp"
+            app:cardCornerRadius="15dp"
             android:id="@+id/administrator"
             app:cardElevation="5dp">
 
@@ -245,6 +257,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Administrator"
+                    android:textColor="@color/card_view_text"
                     android:gravity="center"
                     android:textStyle="bold"/>
             </LinearLayout>
@@ -264,6 +277,7 @@
             android:layout_width="130dp"
             android:layout_height="150dp"
             android:layout_margin="10dp"
+            app:cardCornerRadius="15dp"
             android:id="@+id/liveMeeting"
             app:cardElevation="5dp">
 
@@ -288,6 +302,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Living Meeting"
+                    android:textColor="@color/card_view_text"
                     android:gravity="center"
                     android:textStyle="bold"/>
             </LinearLayout>
@@ -302,6 +317,7 @@
             android:layout_width="130dp"
             android:layout_height="150dp"
             android:layout_margin="10dp"
+            app:cardCornerRadius="15dp"
             android:id="@+id/createForm"
             app:cardElevation="5dp">
 
@@ -326,6 +342,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Create Form"
+                    android:textColor="@color/card_view_text"
                     android:gravity="center"
                     android:textStyle="bold"/>
             </LinearLayout>

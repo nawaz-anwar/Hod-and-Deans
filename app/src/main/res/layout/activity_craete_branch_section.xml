@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F3D6F1"
     tools:context=".Activity.Administrator.CraeteBranchSectionActivity">
 
     <TextView
@@ -25,7 +24,7 @@
         android:id="@+id/view2"
         android:layout_width="300dp"
         android:layout_height="7dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="72dp"
         android:background="@drawable/round_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -36,90 +35,96 @@
         android:id="@+id/btnCreateBranch"
         android:layout_width="287dp"
         android:layout_height="55dp"
-        android:background="@drawable/round_button"
+        android:background="@drawable/buttonbg"
         android:padding="10dp"
         android:text="Create Branch"
-        android:textColor="#000"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.207" />
+        app:layout_constraintVertical_bias="0.167"
+        android:textAllCaps="false"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnCreateSemester"
         android:layout_width="287dp"
         android:layout_height="55dp"
-        android:background="@drawable/round_button"
+        android:background="@drawable/buttonbg"
         android:padding="10dp"
         android:text="Create Semester"
-        android:textColor="#000"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.334" />
+        app:layout_constraintVertical_bias="0.291"
+        android:textAllCaps="false"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnCreateSection"
         android:layout_width="287dp"
         android:layout_height="55dp"
-        android:background="@drawable/round_button"
+        android:background="@drawable/buttonbg"
         android:padding="10dp"
         android:text="Create Section"
-        android:textColor="#000"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.463" />
+        app:layout_constraintVertical_bias="0.415"
+        android:textAllCaps="false"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnCreateSubject"
         android:layout_width="287dp"
         android:layout_height="55dp"
-        android:background="@drawable/round_button"
+        android:background="@drawable/buttonbg"
         android:padding="10dp"
         android:text="Create Subject"
-        android:textColor="#000"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.596" />
+        app:layout_constraintVertical_bias="0.539"
+        android:textAllCaps="false"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnCredentials"
         android:layout_width="287dp"
         android:layout_height="55dp"
-        android:background="@drawable/round_button"
+        android:background="@drawable/buttonbg"
         android:padding="10dp"
         android:text="Create Password"
-        android:textColor="#000"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.853" />
+        app:layout_constraintVertical_bias="0.797"
+        android:textAllCaps="false"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnCreateSessional"
         android:layout_width="287dp"
         android:layout_height="55dp"
-        android:background="@drawable/round_button"
+        android:background="@drawable/buttonbg"
         android:padding="10dp"
         android:text="Create Sessional Title"
-        android:textColor="#000"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.726" />
+        app:layout_constraintVertical_bias="0.671"
+        android:textAllCaps="false"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

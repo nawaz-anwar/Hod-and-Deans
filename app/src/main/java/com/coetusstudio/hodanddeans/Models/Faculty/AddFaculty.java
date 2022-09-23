@@ -36,6 +36,15 @@ public class AddFaculty {
         this.facultyPassword = facultyPassword;
     }
 
+    public AddFaculty(String facultyImage, String facultyName, String facultyEmail, String facultyId, String facultyPassword, String facultyUid) {
+        this.facultyImage = facultyImage;
+        this.facultyName = facultyName;
+        this.facultyEmail = facultyEmail;
+        this.facultyId = facultyId;
+        this.facultyPassword = facultyPassword;
+        this.facultyUid = facultyUid;
+    }
+
     public String getFacultyImage() {
         return facultyImage;
     }
