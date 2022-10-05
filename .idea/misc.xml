@@ -16,7 +16,7 @@
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_addaccountfaculty.xml" value="0.22" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_addfaculty.xml" value="0.22" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_assign_section_faculty.xml" value="0.1703125" />
-        <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_attendance.xml" value="0.184375" />
+        <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_attendance.xml" value="0.22" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_chat.xml" value="0.3333333333333333" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_craete_branch_section.xml" value="0.22" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/activity_create_branch_section.xml" value="0.22" />
@@ -74,7 +74,7 @@
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/singlenotice.xml" value="0.22" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/singlerowaccount.xml" value="0.184375" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/singlerowbranch.xml" value="0.18333333333333332" />
-        <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/singlerowcollectiveattendance.xml" value="0.184375" />
+        <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/singlerowcollectiveattendance.xml" value="0.4482225656877898" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/singlerowfaculty.xml" value="0.3333333333333333" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/singlerowsection.xml" value="0.18333333333333332" />
         <entry key="..\:/App data/HodandDeans/app/src/main/res/layout/singlerowsemester.xml" value="0.18333333333333332" />

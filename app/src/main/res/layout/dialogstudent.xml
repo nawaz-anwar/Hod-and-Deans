@@ -99,7 +99,7 @@
         <Button
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:text="Update Student"
+            android:text="Update Details"
             android:id="@+id/updBtnStudent"
             android:background="@color/purple_200"
             android:textColor="#fff"

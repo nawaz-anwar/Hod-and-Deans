@@ -38,8 +38,7 @@
                         android:layout_height="wrap_content"
                         android:padding="2dp"
                         android:text="Name"
-                        android:textAppearance="?android:textAppearanceMedium"
-                        android:textColor="#050505"
+                        android:textColor="#514B4B"
                         android:textSize="20dp"
                         android:textStyle="bold" />
 
@@ -66,10 +65,9 @@
                         android:layout_height="wrap_content"
                         android:padding="2dp"
                         android:text="Roll Number:"
-                        android:textAppearance="?android:textAppearanceMedium"
-                        android:textColor="#050505"
+                        android:textColor="#514B4B"
                         android:textSize="20dp"
-                        android:textStyle="bold" />
+                        android:textStyle="normal" />
 
                 </RelativeLayout>
 
@@ -90,10 +88,10 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Attendance:"
-                        android:textColor="#0A0A0A"
                         android:padding="4dp"
-                        android:textAppearance="?android:textAppearanceMedium" />
+                        android:text="Attendance:"
+                        android:textColor="#514B4B"
+                        android:textSize="18sp" />
 
                 </RelativeLayout>
                 <RelativeLayout
@@ -105,12 +103,11 @@
                         android:id="@+id/present_input_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="00/10"
-                        android:textStyle="bold"
-                        android:textColor="#070707"
                         android:padding="5dp"
-                        android:textAppearance="?android:textAppearanceLarge"
-                        />
+                        android:text="00/10"
+                        android:textSize="19dp"
+                        android:textColor="#070707"
+                        android:textStyle="bold" />
 
                 </RelativeLayout>
 
@@ -122,10 +119,10 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Absent:"
-                        android:textColor="#050505"
                         android:padding="4dp"
-                        android:textAppearance="?android:textAppearanceMedium" />
+                        android:text="Absent:"
+                        android:textSize="18sp"
+                        android:textColor="#514B4B" />
 
                 </RelativeLayout>
                 <RelativeLayout
@@ -137,12 +134,11 @@
                         android:id="@+id/absent_input_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="0"
-                        android:textStyle="bold"
-                        android:textColor="#070707"
                         android:padding="5dp"
-                        android:textAppearance="?android:textAppearanceLarge"
-                        />
+                        android:text="0"
+                        android:textSize="19dp"
+                        android:textColor="#070707"
+                        android:textStyle="bold" />
 
                 </RelativeLayout>
 
@@ -167,9 +163,8 @@
                         android:layout_height="wrap_content"
                         android:padding="5dp"
                         android:text="Percentage:"
-                        android:textAppearance="?android:textAppearanceMedium"
-                        android:textColor="#050505"
-                        />
+                        android:textSize="18sp"
+                        android:textColor="#514B4B" />
 
                 </RelativeLayout>
 
@@ -184,9 +179,9 @@
                         android:layout_height="wrap_content"
                         android:padding="5dp"
                         android:text="0.00%"
-                        android:textStyle="bold"
+                        android:textSize="19dp"
                         android:textColor="#000000"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                        android:textStyle="bold" />
 
                 </RelativeLayout>
 

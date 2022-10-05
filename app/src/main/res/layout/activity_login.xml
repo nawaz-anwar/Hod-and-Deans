@@ -71,7 +71,7 @@
         <TextView
             android:id="@+id/btnlogin"
             android:layout_width="222dp"
-            android:layout_height="55dp"
+            android:layout_height="wrap_content"
             android:textSize="20sp"
             android:text="Login"
             android:textColor="#fff"
@@ -92,7 +92,7 @@
         <TextView
             android:id="@+id/btnRegisterNow"
             android:layout_width="222dp"
-            android:layout_height="55dp"
+            android:layout_height="wrap_content"
             android:textSize="20sp"
             android:text="Register Now"
             android:layout_marginTop="10dp"

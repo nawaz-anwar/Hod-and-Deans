@@ -25,7 +25,7 @@
         android:id="@+id/view2"
         android:layout_width="300dp"
         android:layout_height="5dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="68dp"
         android:background="@color/btnbgcolor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -101,14 +101,32 @@
         android:background="@drawable/buttonbg"
         android:padding="10dp"
         android:text="Delete Attendance"
+        android:textAllCaps="false"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.655"
-        android:textAllCaps="false"/>
+        app:layout_constraintVertical_bias="0.64" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnDownloadAttendance"
+        android:layout_width="230dp"
+        android:layout_height="55dp"
+        android:background="@drawable/buttonbg"
+        android:padding="10dp"
+        android:text="Download Attendance"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.758" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
